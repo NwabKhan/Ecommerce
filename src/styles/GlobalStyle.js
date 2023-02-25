@@ -39,13 +39,13 @@ body::-webkit-scrollbar-thumb {
     background-clip: content-box;
 }
 
-h1,
+${'' /* h1,
 h2,
 h3,
 h4 {
    font-family: "Work Sans", sans-serif;
 
-}
+} */}
 
 h1 {
   color: ${({ theme }) => theme.colors.heading};
@@ -82,8 +82,7 @@ li {
 }
 
 
-${"" /* resuable code section  */}
-
+${'' /* here are some reuseable styles */}
 .container {
   max-width: 120rem;
   margin: 0 auto;
