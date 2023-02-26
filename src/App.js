@@ -10,11 +10,12 @@ import Cart from "./pages/Cart";
 import SingleProduct from "./pages/SingleProduct";
 import ErrorPage from "./pages/ErrorPage";
 import { GlobalStyle } from "./styles/GlobalStyle";
+import Header from "./components/header/Header";
 
 const App = () => {
-  const theme = {
+  const mytheme = {
     colors: {
-      heading: "rgb(24 24 29)",
+      heading: "rgb(24 29 29)",
       text: "rgba(29 ,29, 29, .8)",
       white: "#fff",
       black: " #212529",
@@ -38,9 +39,10 @@ const App = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={mytheme}>
       <BrowserRouter>
         <GlobalStyle />
+        <Header />
         <Routes>
           <Route>
             <Route path="/" element={<Home />} />
