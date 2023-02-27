@@ -11,6 +11,7 @@ import SingleProduct from "./pages/SingleProduct";
 import ErrorPage from "./pages/ErrorPage";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 
 const App = () => {
   const mytheme = {
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="/*" element={<ErrorPage />} />
           </Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

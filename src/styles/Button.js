@@ -17,9 +17,10 @@ export const Button = styled.button`
 
   &:hover,
   &:active {
+    ${'' /* check transform property here */}
     box-shadow: 0 2rem 2rem 0 rgb(132 144 255 / 30%);
     box-shadow: ${({ theme }) => theme.colors.shadowSupport};
-    transform: scale(0.96);
+    transform: scale(0.96); 
   }
 
   a {

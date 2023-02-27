@@ -105,16 +105,17 @@ const Navbar = () => {
         flex-direction: column;
         visibility: hidden;
         opacity: 0;
-        transform: translateX(100%);
-        /* transform-origin: top; */
-        transition: all 3s linear;
+        ${'' /* if you want to remove that slowly then use this */}
+        ${'' /* transform: translateX(100%);
+        transform-origin: top; 
+        transition: all 3s linear; */}
       }
       .active .navbar-lists {
         visibility: visible;
         opacity: 1;
         transform: translateX(0);
         z-index: 999;
-        transform-origin: right;
+        transform-origin: none;
         transition: all 3s linear;
         .navbar-link {
           font-size: 4rem;
