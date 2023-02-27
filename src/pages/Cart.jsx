@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import styled from "styled-components";
-
+import { useMyCustomHook } from "../context/productcontext";
 const Cart = () => {
-  return <div>Cart</div>;
+  // const name = useContext(AppContext) // consumer to get only value
+  // const {name} = useContext(AppContext) //Consumer to get object
+  const {name} = useMyCustomHook() //using custom hook
+
+  return <h3>{name}</h3>;
 };
 
 const Wrapper = styled.section`
