@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import reducer from "../reducer/ProductReducer";
-import { data } from "../data";
+import { data } from "../resources/productsData";
+import { singleProductData } from "../resources/singleProductData";
 
 const AppContext = createContext();
 
@@ -11,6 +12,8 @@ const initailState = {
   isLoading: false,
   products: [],
   featuredProducts: [],
+  isSingleLoading: false,
+  singleProduct: []
 };
 
 const AppProvider = ({ children }) => {
@@ -25,11 +28,22 @@ const AppProvider = ({ children }) => {
       dispatch({ type: "Error" });
     }
   };
+  
+  const getSingleProduct = (id)=>{
+    try {
+      dispatch({ type: "isSingleLoading" });
+      const singleProduct = singleProductData
+      dispatch({ type: "setSingleProduct", payload: singleProduct, id: id });
+    } catch (err) {
+      dispatch({ type: "Error" });
+    }
+  }
+
   useEffect(() => {
     getProduct();
   }, []);
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, getSingleProduct }}>{children}</AppContext.Provider>
   );
 };
 

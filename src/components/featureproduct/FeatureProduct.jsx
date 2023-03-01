@@ -25,7 +25,7 @@ const FeatureProduct = () => {
       align-items: center;
       position: relative;
       overflow: hidden;
-      transition: all 0.5s linear;
+      transition: all 0.3s linear;
       &::after {
         content: "";
         position: absolute;
@@ -34,7 +34,7 @@ const FeatureProduct = () => {
         width: 0%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        transition: all 0.2s linear;
+        transition: all 0.3s linear;
         cursor: pointer;
       }
       &:hover::after {
@@ -47,12 +47,12 @@ const FeatureProduct = () => {
         max-width: 90%;
         margin-top: 1.5rem;
         height: 20rem;
-        transition: all 0.2s linear;
+        transition: all 0.3s linear;
       }
       .caption {
         position: absolute;
-        top: 15%;
-        right: 10%;
+        top: 10%;
+        right: 8%;
         text-transform: uppercase;
         background-color: ${({ theme }) => theme.colors.bg};
         color: ${({ theme }) => theme.colors.helper};
@@ -68,7 +68,7 @@ const FeatureProduct = () => {
         padding: 0 2rem;
       }
       .card-data-flex {
-        margin: 2rem 0;
+        margin: 1rem 0 ;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -77,7 +77,7 @@ const FeatureProduct = () => {
         color: ${({ theme }) => theme.colors.text};
         text-transform: capitalize;
       }
-      .card-data--price {
+      .card-data-price {
         color: ${({ theme }) => theme.colors.helper};
       }
       .btn {

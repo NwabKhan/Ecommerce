@@ -84,7 +84,7 @@ li {
 
 ${'' /* here are some reuseable styles */}
 .container {
-  max-width: 105rem;
+  max-width: 120rem;
   margin: 0 auto;
 }
 
@@ -113,7 +113,7 @@ ${'' /* here are some reuseable styles */}
   .common-heading {
       font-size: 3.8rem;
       font-weight: 600;
-      margin-bottom: 6rem;
+      margin-bottom: 5rem;
       text-transform: capitalize;
     }
 

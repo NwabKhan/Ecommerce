@@ -22,7 +22,7 @@ const Footer = () => {
       }
     }
     footer {
-      padding: 12rem 0 9rem 0;
+      padding: 12rem 0 5rem 0;
       background-color: ${({ theme }) => theme.colors.footer_bg};
       h3 {
         color: ${({ theme }) => theme.colors.hr};

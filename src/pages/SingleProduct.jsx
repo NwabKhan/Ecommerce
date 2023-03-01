@@ -1,7 +1,24 @@
 import styled from "styled-components";
+import {useParams} from 'react-router-dom'
+import {useMyHook} from '../context/ProductContext'
+import { useEffect } from "react";
+
 const SingleProduct = ()=>{
 
-  return <div>Single Product</div>;
+  const {getSingleProduct, isSingleLoading} = useMyHook()
+  const data = useMyHook()
+  const {id} = useParams()
+
+  useEffect(()=>{
+    getSingleProduct(id)
+  },[id])
+  if(isSingleLoading){
+    console.log("isloading", isSingleLoading)
+  }
+  const singleProduct = data.singleProduct;
+  const finalData = singleProduct.find((n) => n.id==id);
+  console.log("name: ", finalData)
+  return <div>Ok</div>;
 }
 
 const Wrapper = styled.section`

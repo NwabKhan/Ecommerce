@@ -1,28 +1,42 @@
 const ProductReducer = (state, action) => {
-  switch(action.type){
+  switch (action.type) {
     case "Loading":
-      return{
+      return {
         ...state,
-        isLoading: true
-      }
+        isLoading: true,
+      };
     case "setData":
-      const featuredData = action.payload.filter((product)=>{
-        return product.featured === true
-      })
-      return{
+      const featuredData = action.payload.filter((product) => {
+        return product.featured === true;
+      });
+      return {
         ...state,
         products: action.payload,
         featuredProducts: featuredData,
-        isLoading: false
-      }
-    case "Error":
-      return{
+        isLoading: false,
+      };
+    case "isSingleLoading":
+      return {
         ...state,
-        isError: true
-      }
-    default: 
-      return state
+        isSingleLoading: true,
+      };
+    case "setSingleProduct":
+      const filteredProduct = action.payload.filter((item) => {
+        return item.id === action.id;
+      });
+      return {
+        ...state,
+        singleProduct: filteredProduct,
+        isSingleLoading: false,
+      };
+    case "Error":
+      return {
+        ...state,
+        isError: true,
+      };
+    default:
+      return state;
   }
-}
+};
 
-export default ProductReducer
+export default ProductReducer;
