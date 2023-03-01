@@ -1,25 +1,36 @@
 import styled from "styled-components";
-import {useParams} from 'react-router-dom'
-import {useMyHook} from '../context/ProductContext'
+import { useParams } from "react-router-dom";
+import { useMyHook } from "../context/ProductContext";
 import { useEffect } from "react";
 
-const SingleProduct = ()=>{
+const SingleProduct = () => {
+  const { getSingleProduct, isSingleLoading } = useMyHook(); //calling the function getSingleProduct defined in product context
+  const data = useMyHook();
+  const { id } = useParams(); // getting the product id found in url using build in module params
 
-  const {getSingleProduct, isSingleLoading} = useMyHook()
-  const data = useMyHook()
-  const {id} = useParams()
+  useEffect(() => {
+    getSingleProduct(id);
+  },[id]);
 
-  useEffect(()=>{
-    getSingleProduct(id)
-  },[id])
-  if(isSingleLoading){
-    console.log("isloading", isSingleLoading)
+  if (isSingleLoading) {
+    return <h2>---Loading---</h2>;
   }
+
   const singleProduct = data.singleProduct;
-  const finalData = singleProduct.find((n) => n.id==id);
-  console.log("name: ", finalData)
-  return <div>Ok</div>;
-}
+  //Basically singleProduct is an array(single elemnt) of the currnet ID product. To convert that into object using this line below
+  const finalData = singleProduct.find((n) => n.id === id);
+
+  //Since initailly singleProduct is empty, so Final data comes out as undefined. So to tackle that issue use if else
+  if (finalData === undefined) {
+    console.log("Ok Undefined");
+  } else {
+    return (
+      <div>
+        <h3>{finalData.name}</h3>
+      </div>
+    );
+  }
+};
 
 const Wrapper = styled.section`
   .container {

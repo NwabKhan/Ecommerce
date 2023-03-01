@@ -65,7 +65,7 @@ const FeatureProduct = () => {
       background-color: #fff;
       border-radius: 1rem;
       .card-data {
-        padding: 0 2rem;
+        padding: 0 2.5rem;
       }
       .card-data-flex {
         margin: 1rem 0 ;

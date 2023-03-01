@@ -13,7 +13,7 @@ const initailState = {
   products: [],
   featuredProducts: [],
   isSingleLoading: false,
-  singleProduct: []
+  singleProduct: [singleProductData]
 };
 
 const AppProvider = ({ children }) => {
