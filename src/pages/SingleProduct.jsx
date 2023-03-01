@@ -10,6 +10,8 @@ const SingleProduct = () => {
 
   useEffect(() => {
     getSingleProduct(id);
+    window.scrollTo(0, 0);
+
   },[id]);
 
   if (isSingleLoading) {

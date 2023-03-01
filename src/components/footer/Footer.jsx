@@ -91,9 +91,9 @@ const Footer = () => {
 
             <div>
               {/* btn classes are extra , no need for these */}
-              <Button className="btn hireme-btn">
-                <NavLink to="/"> Get Started </NavLink>
-              </Button>
+              <NavLink to="/">
+                <Button className="btn hireme-btn">Get Started</Button>
+              </NavLink>
             </div>
           </div>
         </section>

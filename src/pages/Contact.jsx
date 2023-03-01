@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import {useEffect} from 'react'
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const Wrapper = styled.div`
     padding: 9rem 0 5rem 0;
     text-align: center;
