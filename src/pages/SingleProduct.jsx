@@ -2,17 +2,16 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useMyHook } from "../context/ProductContext";
 import { useEffect } from "react";
-import { Container } from "../styles/Container";
 import PageNavigation from "../components/singlehelpers/PageNavigation";
 import ProductImage from "../components/singlehelpers/ProductImage";
 import FormatPrice from "../components/featureproduct/FormatPrice";
 import { MdSecurity } from "react-icons/md";
 import { GiCash } from "react-icons/gi";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
+import Star from "../components/singlehelpers/Star";
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct } = useMyHook(); //calling the function getSingleProduct defined in product context
-  const data = useMyHook();
   const { id } = useParams(); // getting the product id found in url using build in module params
 
   useEffect(() => {
@@ -43,17 +42,16 @@ const SingleProduct = () => {
     return (
       <Wrapper>
         <PageNavigation title={name} />
-        <Container className="container">
+        <div className="container">
           <div className="grid grid-two-column">
             <div className="product-images">
               <ProductImage images={image} />
             </div>
             <div className="product-data">
               <h2>{name}</h2>
-              <p>{stars}</p>
-              <p>{reviews} reviews</p>
+              <Star stars={stars} reviews = {reviews} />
               <p className="product-data-price">
-                MRP:{" "}
+                MRP:
                 <del>
                   {/* here 100000 is paisa not ruppees */}
                   <FormatPrice price={price + 100000} />
@@ -98,7 +96,7 @@ const SingleProduct = () => {
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </Wrapper>
     );
   }
@@ -106,14 +104,14 @@ const SingleProduct = () => {
 
 const Wrapper = styled.section`
   .container {
-    padding: 9rem 0;
+    padding: 5rem 7rem;
   }
   .product-data {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 2rem;
+    gap: 3rem;
 
     .product-data-warranty {
       width: 100%;
