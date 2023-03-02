@@ -9,6 +9,7 @@ import { MdSecurity } from "react-icons/md";
 import { GiCash } from "react-icons/gi";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Star from "../components/singlehelpers/Star";
+import AddToCart from "../components/addtocart/AddToCart";
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct } = useMyHook(); //calling the function getSingleProduct defined in product context
@@ -37,6 +38,7 @@ const SingleProduct = () => {
       stars,
       reviews,
       image,
+      colors
     } = finalData;
 
     return (
@@ -94,6 +96,8 @@ const SingleProduct = () => {
                   Brand :<span> {company} </span>
                 </p>
               </div>
+              <hr />
+              {stock > 0 && <AddToCart singleProduct = {finalData}/>}
             </div>
           </div>
         </div>

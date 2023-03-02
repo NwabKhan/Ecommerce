@@ -128,7 +128,7 @@ const Footer = () => {
                   </a>
                 </div>
                 <div>
-                  <a href="#" target="_blank">
+                  <a href="https://www.facebook.com/profile.php?id=100090020419739" target="_blank">
                     <FaFacebookF className="icons" />
                   </a>
                 </div>
