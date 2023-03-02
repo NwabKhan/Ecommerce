@@ -1,12 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
-import {useEffect} from 'react'
 
 const ErrorPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const Wrapper = styled.section`
   .container {

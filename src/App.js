@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "./styles/GlobalStyle";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -9,7 +10,6 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import SingleProduct from "./pages/SingleProduct";
 import ErrorPage from "./pages/ErrorPage";
-import { GlobalStyle } from "./styles/GlobalStyle";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 

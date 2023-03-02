@@ -1,11 +1,6 @@
 import styled from "styled-components";
-import {useEffect} from 'react'
 
 const Cart = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
   <div>
     <h1>Good</h1>

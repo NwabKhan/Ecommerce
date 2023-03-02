@@ -2,34 +2,104 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useMyHook } from "../context/ProductContext";
 import { useEffect } from "react";
+import { Container } from "../styles/Container";
+import PageNavigation from "../components/singlehelpers/PageNavigation";
+import ProductImage from "../components/singlehelpers/ProductImage";
+import FormatPrice from "../components/featureproduct/FormatPrice";
+import { MdSecurity } from "react-icons/md";
+import { GiCash } from "react-icons/gi";
+import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 
 const SingleProduct = () => {
-  const { getSingleProduct, isSingleLoading } = useMyHook(); //calling the function getSingleProduct defined in product context
+  const { getSingleProduct, isSingleLoading, singleProduct } = useMyHook(); //calling the function getSingleProduct defined in product context
   const data = useMyHook();
   const { id } = useParams(); // getting the product id found in url using build in module params
 
   useEffect(() => {
     getSingleProduct(id);
     window.scrollTo(0, 0);
+  }, [id]);
 
-  },[id]);
-
-  if (isSingleLoading) {
-    return <h2>---Loading---</h2>;
-  }
-
-  const singleProduct = data.singleProduct;
   //Basically singleProduct is an array(single elemnt) of the currnet ID product. To convert that into object using this line below
   const finalData = singleProduct.find((n) => n.id === id);
 
   //Since initailly singleProduct is empty, so Final data comes out as undefined. So to tackle that issue use if else
-  if (finalData === undefined) {
-    console.log("Ok Undefined");
+  if (finalData === undefined || isSingleLoading) {
+    return <div className="page_loading">---Loading</div>;
   } else {
+    const {
+      id: myid,
+      name,
+      company,
+      price,
+      description,
+      category,
+      stock,
+      stars,
+      reviews,
+      image,
+    } = finalData;
+
     return (
-      <div>
-        <h3>{finalData.name}</h3>
-      </div>
+      <Wrapper>
+        <PageNavigation title={name} />
+        <Container className="container">
+          <div className="grid grid-two-column">
+            <div className="product-images">
+              <ProductImage images={image} />
+            </div>
+            <div className="product-data">
+              <h2>{name}</h2>
+              <p>{stars}</p>
+              <p>{reviews} reviews</p>
+              <p className="product-data-price">
+                MRP:{" "}
+                <del>
+                  {/* here 100000 is paisa not ruppees */}
+                  <FormatPrice price={price + 100000} />
+                </del>
+              </p>
+              <p className="product-data-price product-data-real-price">
+                Deal of the Day <FormatPrice price={price} />
+              </p>
+              <p>{description}</p>
+              <div className="product-data-warranty">
+                <div className="product-warranty-data">
+                  <TbTruckDelivery className="warranty-icon" />
+                  <p>Fast & Free Delivery </p>
+                </div>
+
+                <div className="product-warranty-data">
+                  <GiCash className="warranty-icon" />
+                  <p>Payment on Delivery</p>
+                </div>
+
+                <div className="product-warranty-data">
+                  <MdSecurity className="warranty-icon" />
+                  <p>Full warranty </p>
+                </div>
+
+                <div className="product-warranty-data">
+                  <TbReplace className="warranty-icon" />
+                  <p>Replace Order</p>
+                </div>
+              </div>
+              <div className="product-data-info">
+                <p>
+                  Available:
+                  <span> {stock > 0 ? "In Stock" : "Out of Stock"}</span>
+                </p>
+                <p>
+                  ID : <span> {myid} </span>
+                </p>
+                <p>
+                  Brand :<span> {company} </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Wrapper>
     );
   }
 };
