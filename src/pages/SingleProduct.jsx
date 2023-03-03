@@ -25,7 +25,9 @@ const SingleProduct = () => {
 
   //Since initailly singleProduct is empty, so Final data comes out as undefined. So to tackle that issue use if else
   if (finalData === undefined || isSingleLoading) {
-    return <div className="page_loading">---Loading</div>;
+    return <div className="page_loading">
+      {console.log("Data is undefined or not: ")}
+    </div>;
   } else {
     const {
       id: myid,

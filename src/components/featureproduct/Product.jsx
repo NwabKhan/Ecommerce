@@ -5,7 +5,7 @@ const Product = (data) => {
   const { id, image, name, price, category } = data;
   return (
     <div>
-      <NavLink to={`singleproduct/${id}`}>
+      <NavLink to={`/singleproduct/${id}`}>
         <div className="card">
           <figure>
             <img src={image} alt={name} />
