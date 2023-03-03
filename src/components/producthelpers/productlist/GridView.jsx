@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import Product from '../featureproduct/Product';
+import Product from '../../featureproduct/Product';
 const GridView = ({products}) => {
   return (
     <Wrapper className='section'>
@@ -54,7 +54,8 @@ const Wrapper = styled.section`
       transition: all 0.2s linear;
     }
   }
-  .card {
+  ${'' /* these classes coming from Product component */}
+  .card { 
     background-color: ${({ theme }) => theme.colors.bg};
     border-radius: 1rem;
     .card-data {

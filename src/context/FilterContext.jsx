@@ -17,12 +17,15 @@ const FilterContextProvider = ({children})=>{
     const setGridView = ()=>{
         dispatch({type: "GridView"})
     }
+    const setListView = ()=>{
+        dispatch({type: "ListView"})
+    }
 
     useEffect(()=>{
         dispatch({type: "LoadFilterProduct", payload: products})
     }, [products])
     return(
-        <FilterContext.Provider value={{...state, setGridView}}>{children}</FilterContext.Provider>
+        <FilterContext.Provider value={{...state, setGridView, setListView}}>{children}</FilterContext.Provider>
     )
 }
 
