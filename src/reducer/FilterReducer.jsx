@@ -26,7 +26,6 @@ const FilterReducer = (state, action) => {
       };
 
     case "SortingProduct":
-
       var sortedData;
       var { allProducts, sorting_value } = state;
       var tempProducts = [...allProducts]; //making copy of the allProducts in tempProducts
@@ -43,13 +42,13 @@ const FilterReducer = (state, action) => {
         }
         //sort by name alphabetically (ascending)
         if (sorting_value === "a-z") {
-          return a.name.localeCompare(b.name)
+          return a.name.localeCompare(b.name);
         }
         //sort by name alphabetically (descending)
         if (sorting_value === "z-a") {
           return b.name.localeCompare(a.name);
         }
-      };      
+      };
       // using ftn sortingProduct getting the sorted products
       sortedData = tempProducts.sort(sortingProduct);
 
@@ -58,35 +57,45 @@ const FilterReducer = (state, action) => {
         filterProducts: sortedData,
       };
 
-      case "updateFilterValue":
-        const {value, name} = action.payload
-        return{
-          ...state,
-          filters: {
-            ...state.filters,
-            [name] : value.toLowerCase()
-          }
-        }
-        //it will be triggerd when the value in the text(filters:{text}) changes
-      case "FilterProduct" :
-        let filterdProducts ;
-        let { filterProducts } = state;
-        let temp = [...filterProducts];
+    case "updateFilterValue":
+      const { value, name } = action.payload;
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value.toLowerCase(),
+        },
+      };
+    //it will be triggerd when the value in the text(filters:{text}) changes
+    case "FilterProduct":
+      let filterdProducts;
+      let { filterProducts } = state;
+      let temp = [...filterProducts];
 
-        const {text} = state.filters
-        if(text){
-          filterdProducts = temp.filter((currentProduct)=>{
-            return currentProduct.name.toLowerCase().includes(text)
-          })
-        }
-        if(text === ""){
-          filterdProducts = temp
-        }
+      const { text, category, company } = state.filters;
+      if (text) {
+        filterdProducts = temp.filter((currentProduct) => //in arrow frn if we have single line return 
+          currentProduct.name.toLowerCase().includes(text)//then there is no need for curly brackets and return keyword
+        );
+      }
+      if (text === "") {
+        filterdProducts = temp;
+      }
+      if (category !== "all") { //if (category is anythind except 'all') do this
+        filterdProducts = filterdProducts.filter(
+          (currentProduct) => currentProduct.category === category
+        );
+      }
+      if (company !== "all") { 
+        filterdProducts = filterdProducts.filter(
+          (currentProduct) => currentProduct.company === company
+        );
+      }
 
-        return{
-          ...state,
-          filterProducts: filterdProducts
-        }
+      return {
+        ...state,
+        filterProducts: filterdProducts,
+      };
     default:
       return state;
   }

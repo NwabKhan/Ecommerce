@@ -1,19 +1,80 @@
-import React from 'react'
-import styled from "styled-components"
-import {useFilterHook} from '../../context/FilterContext'
+import React from "react";
+import styled from "styled-components";
+import { useFilterHook } from "../../context/FilterContext";
 
 const FilterSection = () => {
-  const {filters:{text} , updateFilterValue} = useFilterHook()
+  const {
+    filters: { text, category, company },
+    updateFilterValue,
+    allProducts,
+  } = useFilterHook();
+  //To get an array of unique data for each category like all, mobilem laptop etc.
+  const getUniqueData = (data, property) => {
+    let newData = data.map((currentData) => {
+      return currentData[property];
+    });
+    //the data in the output array(newData) is repeated
+    //So, to get an array of unique elements we use [...new Set(newData)]
+    newData = ["all", ...new Set(newData)];
+    return newData;
+  };
+  const categoryData = getUniqueData(allProducts, "category"); // an arry of unique categories
+  const companyData = getUniqueData(allProducts, "company"); // an array of unique companies
   return (
     <Wrapper>
-      <div className='filter-search'>
-        <form onSubmit={(e)=>e.preventDefault()}>
-          <input type="text" name = "text" value={text} onChange = {(e)=>updateFilterValue(e)} />
+      <div className="filter-search">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            name="text"
+            value={text}
+            placeholder="SEARCH"
+            onChange={(e) => updateFilterValue(e)}
+          />
+        </form>
+        <div className="filter-category">
+          <h3>Category</h3>
+          <div>
+            {categoryData.map((currentCategory, index) => {
+              //name property should be same as in data beacuse we are searching throu names in data
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  name="category"
+                  value={currentCategory}
+                  className = {currentCategory === category ? "active" : ""}
+                  onClick={(e) => updateFilterValue(e)}
+                >
+                  {currentCategory}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="filter-company">
+        <h3>Company</h3>
+
+        <form action="#">
+          <select
+            name="company"
+            id="company"
+            className="filter-company--select"
+            onClick={(e)=>updateFilterValue(e)}>
+            {companyData.map((currentCompany, index) => {
+              return (
+                <option key={index} value={currentCompany} name="company">
+                  {currentCompany}
+                </option>
+              );
+            })}
+          </select>
         </form>
       </div>
+      </div>
     </Wrapper>
-  )
-}
+  );
+};
 const Wrapper = styled.section`
   padding: 5rem 0;
   display: flex;
@@ -105,4 +166,4 @@ const Wrapper = styled.section`
     color: #000;
   }
 `;
-export default FilterSection
+export default FilterSection;
