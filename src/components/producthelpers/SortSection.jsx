@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 
 const SortSection = () => {
-  const { grid_view, setGridView, setListView, filterProducts } = useFilterHook();
+  const { grid_view, setGridView, setListView, filterProducts, sorting } = useFilterHook();
 
   return (
     <Wrapper className="sort-section">
@@ -28,7 +28,19 @@ const SortSection = () => {
       <div className="product-data">
         <p>{`${filterProducts.length} Products Available`}</p>
       </div>
-      <div className="sort-selection">Dropdown</div>
+      <div className="sort-selection">
+        <form action="#">
+          <select id = 'sort' name = 'sort' className="sort-selection--style" onClick={(e)=>sorting(e)}>
+            <option value="lowest">Price(lowest)</option>
+            <option disabled></option>
+            <option value="highest">Price(highest)</option>
+            <option disabled></option>
+            <option value="a-z">Price(a-z)</option>
+            <option disabled></option>
+            <option value="z-a">Price(z-a)</option>
+          </select>
+        </form>
+      </div>
     </Wrapper>
   );
 };
