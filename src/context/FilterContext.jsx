@@ -8,7 +8,10 @@ const initialState = {
     filterProducts : [],
     allProducts : [],
     grid_view: true,
-    sorting_value: "lowest"
+    sorting_value: "lowest",
+    filters: {
+        text : ""
+    }
 }
 const FilterContextProvider = ({children})=>{
 
@@ -18,23 +21,35 @@ const FilterContextProvider = ({children})=>{
     const setGridView = ()=>{
         dispatch({type: "GridView"})
     }
+    //it will make the grid_view false
     const setListView = ()=>{
         dispatch({type: "ListView"})
     }
 
-    const sorting = (event)=>{
+    //Function to change the sorting value
+    const sorting = (event)=>{ 
         const value = event.target.value
         dispatch({type: "getSortValue", payload: value})        
     }
-    useEffect(()=>{
+    //To update the filter value based on what user type
+    const updateFilterValue = (event)=>{
+        const value = event.target.value
+        const name = event.target.name
+        dispatch({type: "updateFilterValue", payload: {value, name}})
+    }
+    //to sort the products according to sorting value. i.e highest cost(ascending)
+    //run this useEffect when even the sorting-value or the text(in filter) changes
+    useEffect(()=>{ 
         dispatch({type: "SortingProduct"})
-    }, [state.sorting_value])
+        dispatch({type: "FilterProduct"})
+    }, [products,state.sorting_value, state.filters])
 
+    //it will call initailly to get all the products when page loads
     useEffect(()=>{
         dispatch({type: "LoadFilterProduct", payload: products})
     }, [products])
     return(
-        <FilterContext.Provider value={{...state, setGridView, setListView, sorting}}>{children}</FilterContext.Provider>
+        <FilterContext.Provider value={{...state, setGridView, setListView, sorting, updateFilterValue, }}>{children}</FilterContext.Provider>
     )
 }
 

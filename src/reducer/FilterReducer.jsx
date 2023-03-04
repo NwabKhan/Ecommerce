@@ -19,7 +19,7 @@ const FilterReducer = (state, action) => {
         grid_view: false,
       };
 
-    case "getSortValue":
+    case "getSortValue": //It run when we change the sorting values i.e chnaging lowest to z-a in select
       return {
         ...state,
         sorting_value: action.payload,
@@ -27,26 +27,30 @@ const FilterReducer = (state, action) => {
 
     case "SortingProduct":
 
-      let sortedData;
-      const { filterProducts, sorting_value } = state;
-      let tempProducts = [...filterProducts];
+      var sortedData;
+      var { allProducts, sorting_value } = state;
+      var tempProducts = [...allProducts]; //making copy of the allProducts in tempProducts
 
-      //sortin data on differnt checks
+      //sorting data on differnt checks
       const sortingProduct = (a, b) => {
+        //sort by price(lower first then higher)
         if (sorting_value === "lowest") {
           return a.price - b.price;
         }
+        //sort by price(higher first then lower)
         if (sorting_value === "highest") {
           return b.price - a.price;
         }
+        //sort by name alphabetically (ascending)
         if (sorting_value === "a-z") {
           return a.name.localeCompare(b.name)
         }
+        //sort by name alphabetically (descending)
         if (sorting_value === "z-a") {
           return b.name.localeCompare(a.name);
         }
       };      
-
+      // using ftn sortingProduct getting the sorted products
       sortedData = tempProducts.sort(sortingProduct);
 
       return {
@@ -54,6 +58,35 @@ const FilterReducer = (state, action) => {
         filterProducts: sortedData,
       };
 
+      case "updateFilterValue":
+        const {value, name} = action.payload
+        return{
+          ...state,
+          filters: {
+            ...state.filters,
+            [name] : value.toLowerCase()
+          }
+        }
+        //it will be triggerd when the value in the text(filters:{text}) changes
+      case "FilterProduct" :
+        let filterdProducts ;
+        let { filterProducts } = state;
+        let temp = [...filterProducts];
+
+        const {text} = state.filters
+        if(text){
+          filterdProducts = temp.filter((currentProduct)=>{
+            return currentProduct.name.toLowerCase().includes(text)
+          })
+        }
+        if(text === ""){
+          filterdProducts = temp
+        }
+
+        return{
+          ...state,
+          filterProducts: filterdProducts
+        }
     default:
       return state;
   }

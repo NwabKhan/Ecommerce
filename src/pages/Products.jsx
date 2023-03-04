@@ -5,10 +5,6 @@ import ProductList from "../components/producthelpers/productlist/ProductList";
 import SortSection from "../components/producthelpers/SortSection";
 import {useFilterHook} from '../context/FilterContext'
 const Products = () => {
-  const {filterProducts} = useFilterHook()
-  if(filterProducts[0] === undefined){
-    return <h2>---Loading</h2>
-  }else{
   return (
     <Wrapper>
       <div className="container grid grid-filter-column">
@@ -26,7 +22,6 @@ const Products = () => {
       </div>
     </Wrapper>
   );
-  }
 };
 
 const Wrapper = styled.section`

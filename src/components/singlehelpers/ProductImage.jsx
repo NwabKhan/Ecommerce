@@ -54,12 +54,11 @@ const ProductImage = ({ images }) => {
       <div className="grid gris-four-cloumn">
         {images.map((image, i) => {
           return (
-            <figure>
+            <figure key={i}>
               <img
                 src={image.url}
                 alt={image.filename}
                 className="box-image--style"
-                key={i}
                 onClick = {()=>setIndex(i)}
               />
             </figure>
