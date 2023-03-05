@@ -72,7 +72,7 @@ const FilterReducer = (state, action) => {
       let { filterProducts } = state;
       let temp = [...filterProducts];
 
-      const { text, category, company } = state.filters;
+      const { text, category, company, color } = state.filters;
       if (text) {
         filterdProducts = temp.filter((currentProduct) => //in arrow frn if we have single line return 
           currentProduct.name.toLowerCase().includes(text)//then there is no need for curly brackets and return keyword
@@ -89,6 +89,11 @@ const FilterReducer = (state, action) => {
       if (company !== "all") { 
         filterdProducts = filterdProducts.filter(
           (currentProduct) => currentProduct.company === company
+        );
+      }
+      if (color !== "all") {
+        filterdProducts = filterdProducts.filter((currentProduct) =>
+          currentProduct.colors.includes(color)
         );
       }
 

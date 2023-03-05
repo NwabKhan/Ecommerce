@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useFilterHook } from "../../context/FilterContext";
-
+import {FaCheck} from "react-icons/fa"
 const FilterSection = () => {
   const {
-    filters: { text, category, company },
+    filters: { text, category, color },
     updateFilterValue,
     allProducts,
   } = useFilterHook();
@@ -13,13 +13,21 @@ const FilterSection = () => {
     let newData = data.map((currentData) => {
       return currentData[property];
     });
+    // We want a single aaray of unique colors but colors are
+    //  also in array, to get value in that we are using this one
+    //  [...new Set([].concat(...newData))] => this mathod was use earlier to get unique
+    //  data(array of arrays). Now we use data.flat()
+    if (property === "colors") {
+      // return (newData =  ["all", ...new Set([].concat(...newData))])
+      newData = newData.flat();
+    }
     //the data in the output array(newData) is repeated
     //So, to get an array of unique elements we use [...new Set(newData)]
-    newData = ["all", ...new Set(newData)];
-    return newData;
+    return (newData = ["all", ...new Set(newData)]);
   };
   const categoryData = getUniqueData(allProducts, "category"); // an arry of unique categories
   const companyData = getUniqueData(allProducts, "company"); // an array of unique companies
+  const colorsData = getUniqueData(allProducts, "colors"); // an array of unique colors
   return (
     <Wrapper>
       <div className="filter-search">
@@ -36,14 +44,14 @@ const FilterSection = () => {
           <h3>Category</h3>
           <div>
             {categoryData.map((currentCategory, index) => {
-              //name property should be same as in data beacuse we are searching throu names in data
+              //name property should be same as in data beacuse we are searching throug names in data
               return (
                 <button
                   key={index}
                   type="button"
                   name="category"
                   value={currentCategory}
-                  className = {currentCategory === category ? "active" : ""}
+                  className={currentCategory === category ? "active" : ""}
                   onClick={(e) => updateFilterValue(e)}
                 >
                   {currentCategory}
@@ -53,23 +61,57 @@ const FilterSection = () => {
           </div>
         </div>
         <div className="filter-company">
-        <h3>Company</h3>
+          <h3>Company</h3>
 
-        <form action="#">
-          <select
-            name="company"
-            id="company"
-            className="filter-company--select"
-            onClick={(e)=>updateFilterValue(e)}>
-            {companyData.map((currentCompany, index) => {
+          <form action="#">
+            <select
+              name="company"
+              id="company"
+              className="filter-company--select"
+              onClick={(e) => updateFilterValue(e)}
+            >
+              {companyData.map((currentCompany, index) => {
+                return (
+                  <option key={index} value={currentCompany} name="company">
+                    {currentCompany}
+                  </option>
+                );
+              })}
+            </select>
+          </form>
+        </div>
+        <div className="filter-colors colors">
+        <h3>Colors</h3>
+
+        <div className="filter-color-style">
+          {colorsData.map((currentColor, index) => {
+            if (currentColor === "all") {
               return (
-                <option key={index} value={currentCompany} name="company">
-                  {currentCompany}
-                </option>
+                <button
+                  key={index}
+                  type="button"
+                  value={currentColor}
+                  name="color"
+                  className="color-all--style"
+                  onClick={updateFilterValue}>
+                  all
+                </button>
               );
-            })}
-          </select>
-        </form>
+            }
+            return (
+              <button
+                key={index}
+                type="button"
+                value={currentColor}
+                name="color"
+                style={{ backgroundColor: currentColor }}
+                className={color === currentColor ? "btnStyle active" : "btnStyle"}
+                onClick={updateFilterValue}>
+                {color === currentColor ? <FaCheck className="checkStyle" /> : null}
+              </button>
+            );
+          })}
+        </div>
       </div>
       </div>
     </Wrapper>
