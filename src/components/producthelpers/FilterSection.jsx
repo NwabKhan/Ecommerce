@@ -1,21 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { FaCheck } from "react-icons/fa";
+
 import { useFilterHook } from "../../context/FilterContext";
-import {FaCheck} from "react-icons/fa"
-import FormatPrice from '../featureproduct/FormatPrice'
-import {Button} from '../../styles/Button'
+import { Button } from "../../styles/Button";
+
 const FilterSection = () => {
   const {
-    filters: { text, category, color, price, maxPrice, minPrice },
+    filters: { text, category, color },
     updateFilterValue,
     allProducts,
-    clearFilters
+    clearFilters,
   } = useFilterHook();
+
   //To get an array of unique data for each category like all, mobilem laptop etc.
   const getUniqueData = (data, property) => {
     let newData = data.map((currentData) => {
       return currentData[property];
     });
+
     // We want a single aaray of unique colors but colors are
     //  also in array, to get value in that we are using this one
     //  [...new Set([].concat(...newData))] => this mathod was use earlier to get unique
@@ -28,9 +31,11 @@ const FilterSection = () => {
     //So, to get an array of unique elements we use [...new Set(newData)]
     return (newData = ["all", ...new Set(newData)]);
   };
+
   const categoryData = getUniqueData(allProducts, "category"); // an arry of unique categories
   const companyData = getUniqueData(allProducts, "company"); // an array of unique companies
   const colorsData = getUniqueData(allProducts, "colors"); // an array of unique colors
+
   return (
     <Wrapper>
       <div className="filter-search">
@@ -43,6 +48,7 @@ const FilterSection = () => {
             onChange={(e) => updateFilterValue(e)}
           />
         </form>
+
         <div className="filter-category">
           <h3>Category</h3>
           <div>
@@ -63,9 +69,9 @@ const FilterSection = () => {
             })}
           </div>
         </div>
+
         <div className="filter-company">
           <h3>Company</h3>
-
           <form action="#">
             <select
               name="company"
@@ -83,40 +89,46 @@ const FilterSection = () => {
             </select>
           </form>
         </div>
-        <div className="filter-colors colors">
-        <h3>Colors</h3>
 
-        <div className="filter-color-style">
-          {colorsData.map((currentColor, index) => {
-            if (currentColor === "all") {
+        <div className="filter-colors colors">
+          <h3>Colors</h3>
+          <div className="filter-color-style">
+            {colorsData.map((currentColor, index) => {
+              if (currentColor === "all") {
+                return (
+                  <button
+                    key={index}
+                    type="button"
+                    value={currentColor}
+                    name="color"
+                    className="color-all--style"
+                    onClick={updateFilterValue}
+                  >
+                    all
+                  </button>
+                );
+              }
               return (
                 <button
                   key={index}
                   type="button"
                   value={currentColor}
                   name="color"
-                  className="color-all--style"
-                  onClick={updateFilterValue}>
-                  all
+                  style={{ backgroundColor: currentColor }}
+                  className={
+                    color === currentColor ? "btnStyle active" : "btnStyle"
+                  }
+                  onClick={updateFilterValue}
+                >
+                  {color === currentColor ? (
+                    <FaCheck className="checkStyle" />
+                  ) : null}
                 </button>
               );
-            }
-            return (
-              <button
-                key={index}
-                type="button"
-                value={currentColor}
-                name="color"
-                style={{ backgroundColor: currentColor }}
-                className={color === currentColor ? "btnStyle active" : "btnStyle"}
-                onClick={updateFilterValue}>
-                {color === currentColor ? <FaCheck className="checkStyle" /> : null}
-              </button>
-            );
-          })}
-        </div>
+            })}
+          </div>
 
-        <div className="filter_price">
+          {/* <div className="filter_price">
         <h3>Price</h3>
         <p>
           <FormatPrice price={price} />
@@ -129,18 +141,19 @@ const FilterSection = () => {
           value={price}
           onChange={updateFilterValue}
         />
-      </div>
+      </div> */}
 
-      <div className="filter-clear">
-        <Button className="btn" onClick={clearFilters}>
-          Clear Filters
-        </Button>
-      </div>
-      </div>
+          <div className="filter-clear">
+            <Button className="btn" onClick={() => clearFilters()}>
+              Clear Filters
+            </Button>
+          </div>
+        </div>
       </div>
     </Wrapper>
   );
 };
+
 const Wrapper = styled.section`
   padding: 5rem 0;
   display: flex;
@@ -227,9 +240,13 @@ const Wrapper = styled.section`
     align-items: center;
     gap: 1rem;
   }
+  .filter-clear {
+    margin-top: 3rem;
+  }
   .filter-clear .btn {
     background-color: #ec7063;
     color: #000;
   }
 `;
+
 export default FilterSection;

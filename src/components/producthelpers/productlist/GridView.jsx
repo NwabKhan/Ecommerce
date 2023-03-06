@@ -1,19 +1,17 @@
-import React from 'react'
-import styled from 'styled-components';
-import Product from '../../featureproduct/Product';
-const GridView = ({products}) => {
+import React from "react";
+import styled from "styled-components";
+import Product from "../../featureproduct/Product";
+const GridView = ({ products }) => {
   return (
-    <Wrapper className='section'>
-        <div className='container grid grid-three-column'>
-            {products.map((currentProduct)=>{
-                return (
-                    <Product key = {currentProduct.id} {...currentProduct}/>
-                )
-            })}
-        </div>
+    <Wrapper className="section">
+      <div className="container grid grid-three-column">
+        {products.map((currentProduct) => {
+          return <Product key={currentProduct.id} {...currentProduct} />;
+        })}
+      </div>
     </Wrapper>
-  )
-}
+  );
+};
 const Wrapper = styled.section`
   padding: 9rem 0;
   .container {
@@ -54,8 +52,8 @@ const Wrapper = styled.section`
       transition: all 0.2s linear;
     }
   }
-  ${'' /* these classes coming from Product component */}
-  .card { 
+  ${"" /* these classes coming from Product component */}
+  .card {
     background-color: ${({ theme }) => theme.colors.bg};
     border-radius: 1rem;
     .card-data {
@@ -94,4 +92,4 @@ const Wrapper = styled.section`
     }
   }
 `;
-export default GridView
+export default GridView;

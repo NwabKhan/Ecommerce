@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+
 import FilterSection from "../components/producthelpers/FilterSection";
 import ProductList from "../components/producthelpers/productlist/ProductList";
 import SortSection from "../components/producthelpers/SortSection";
+
 const Products = () => {
   return (
     <Wrapper>
@@ -10,6 +12,7 @@ const Products = () => {
         <section>
           <FilterSection />
         </section>
+
         <section className="product-view--sort">
           <div className="sort-filter">
             <SortSection />

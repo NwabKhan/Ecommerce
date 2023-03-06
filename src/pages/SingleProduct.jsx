@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useMyHook } from "../context/ProductContext";
 import { useEffect } from "react";
-import PageNavigation from "../components/singlehelpers/PageNavigation";
-import ProductImage from "../components/singlehelpers/ProductImage";
-import FormatPrice from "../components/featureproduct/FormatPrice";
 import { MdSecurity } from "react-icons/md";
 import { GiCash } from "react-icons/gi";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
+
+import { useMyHook } from "../context/ProductContext";
+import PageNavigation from "../components/singlehelpers/PageNavigation";
+import ProductImage from "../components/singlehelpers/ProductImage";
+import FormatPrice from "../components/featureproduct/FormatPrice";
 import Star from "../components/singlehelpers/Star";
 import AddToCart from "../components/addtocart/AddToCart";
 
@@ -25,9 +26,11 @@ const SingleProduct = () => {
 
   //Since initailly singleProduct is empty, so Final data comes out as undefined. So to tackle that issue use if else
   if (finalData === undefined || isSingleLoading) {
-    return <div className="page_loading">
-      <h2>---Loading</h2>
-    </div>;
+    return (
+      <div className="page_loading">
+        <h2>---Loading</h2>
+      </div>
+    );
   } else {
     const {
       id: myid,
@@ -40,7 +43,7 @@ const SingleProduct = () => {
       stars,
       reviews,
       image,
-      colors
+      colors,
     } = finalData;
 
     return (
@@ -51,9 +54,10 @@ const SingleProduct = () => {
             <div className="product-images">
               <ProductImage images={image} />
             </div>
+
             <div className="product-data">
               <h2>{name}</h2>
-              <Star stars={stars} reviews = {reviews} />
+              <Star stars={stars} reviews={reviews} />
               <p className="product-data-price">
                 MRP:
                 <del>
@@ -65,6 +69,7 @@ const SingleProduct = () => {
                 Deal of the Day <FormatPrice price={price} />
               </p>
               <p>{description}</p>
+
               <div className="product-data-warranty">
                 <div className="product-warranty-data">
                   <TbTruckDelivery className="warranty-icon" />
@@ -86,6 +91,7 @@ const SingleProduct = () => {
                   <p>Replace Order</p>
                 </div>
               </div>
+
               <div className="product-data-info">
                 <p>
                   Available:
@@ -98,8 +104,9 @@ const SingleProduct = () => {
                   Brand :<span> {company} </span>
                 </p>
               </div>
+
               <hr />
-              {stock > 0 && <AddToCart singleProduct = {finalData}/>}
+              {stock > 0 && <AddToCart singleProduct={finalData} />}
             </div>
           </div>
         </div>

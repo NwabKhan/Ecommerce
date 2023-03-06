@@ -1,9 +1,21 @@
-import React from 'react'
-import Navbar from './Navbar'
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import Navbar from "./Navbar";
+import styled from "styled-components";
+
+import { NavLink } from "react-router-dom";
 const Header = () => {
-const Header = styled.header`
+  return (
+    <Wrapper>
+      <NavLink to="/">
+        <img style={{ height: "8rem" }} src="./images/logo.png" />
+      </NavLink>
+
+      <Navbar />
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.header`
   padding: 0 4.8rem;
   height: 10rem;
   background-color: ${({ theme }) => theme.colors.bg};
@@ -11,18 +23,9 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  ${'' /* .logo {
+  .logo {
     height: 5rem;
-  } */}
+  }
 `;
-  return (
-    <Header>
-        <NavLink to = "/">
-            <img style={{height: '8rem'}} src='./images/logo.png' />
-        </NavLink>
-        <Navbar />
-    </Header>
-  )
-}
 
-export default Header
+export default Header;

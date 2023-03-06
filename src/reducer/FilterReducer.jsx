@@ -1,6 +1,6 @@
 const FilterReducer = (state, action) => {
   switch (action.type) {
-    case "LoadFilterProduct":
+    case "LOAD_FILTER_PRODUCT":
       // 1st method
       // getting the aaray of the prices of products for finding
       //max_pice(used in range filter section). Directly using max
@@ -15,15 +15,15 @@ const FilterReducer = (state, action) => {
       // 3nd method(preffered)
       //We can also find max number in array using reducer method, but it will
       //cause error because we don't have initial value, so put zero(0) after
-      //Math.max(initailPrice, currentPrice) as used below
+      //(Math.max(initailPrice, currentPrice),0) as used below
 
-      let priceArray = action.payload.map(
-        (currentProduct) => currentProduct.price
-      );
-      const max_price = priceArray.reduce(
-        (initailPrice, currentPrice) => Math.max(initailPrice, currentPrice),
-        0
-      );
+      // If we use range filter in app , then use this to find max no
+      // let priceArray = action.payload.map(
+      //   (currentProduct) => currentProduct.price
+      // );
+      // const max_price = priceArray.reduce(
+      //   (initailPrice, currentPrice) => (Math.max(initailPrice, currentPrice),0)
+      // );
 
       return {
         ...state,
@@ -31,30 +31,28 @@ const FilterReducer = (state, action) => {
         allProducts: [...action.payload],
         filters: {
           ...state.filters,
-          price: max_price,
-          maxPrice: max_price,
         },
       };
 
-    case "GridView":
+    case "GRID_VIEW":
       return {
         ...state,
         grid_view: true,
       };
 
-    case "ListView":
+    case "LIST_VIEW":
       return {
         ...state,
         grid_view: false,
       };
 
-    case "getSortValue": //It run when we change the sorting values i.e chnaging lowest to z-a in select
+    case "SORT_VALUE": //It run when we change the sorting values i.e chnaging lowest to z-a in select
       return {
         ...state,
         sorting_value: action.payload,
       };
 
-    case "SortingProduct":
+    case "SINGLE_PRODUCT":
       var sortedData;
       var { allProducts, sorting_value } = state;
       var tempProducts = [...allProducts]; //making copy of the allProducts in tempProducts
@@ -86,7 +84,7 @@ const FilterReducer = (state, action) => {
         filterProducts: sortedData,
       };
 
-    case "updateFilterValue":
+    case "UPDATE_FILTER_VALUE":
       const { value, name } = action.payload;
       return {
         ...state,
@@ -95,13 +93,14 @@ const FilterReducer = (state, action) => {
           [name]: value.toLowerCase(),
         },
       };
+
     //it will be triggerd when the value in the text(filters:{text}) changes
-    case "FilterProduct":
+    case "FILTER_PRODUCT":
       let filterdProducts;
       let { filterProducts } = state;
       let temp = [...filterProducts];
 
-      const { text, category, company, color, price } = state.filters;
+      const { text, category, company, color } = state.filters;
       if (text) {
         filterdProducts = temp.filter(
           (
@@ -128,16 +127,6 @@ const FilterReducer = (state, action) => {
           currentProduct.colors.includes(color)
         );
       }
-      if (price === 0) {
-        filterdProducts = filterdProducts.filter(
-          (currentProduct) => currentProduct.price === price
-        );
-      } else {
-        filterdProducts = filterdProducts.filter(
-          (currentProduct) => currentProduct.price <= price
-        );
-      }
-
       return {
         ...state,
         filterProducts: filterdProducts,
@@ -152,11 +141,9 @@ const FilterReducer = (state, action) => {
           category: "all",
           company: "all",
           color: "all",
-          price: 0,
-          maxPrice: 0,
-          minPrice: 0,
         },
       };
+
     default:
       return state;
   }

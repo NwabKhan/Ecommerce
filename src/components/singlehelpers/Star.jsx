@@ -1,34 +1,32 @@
-import React from 'react'
-import {BsFillStarFill, BsStarHalf, BsStar} from 'react-icons/bs'
-import styled from 'styled-components';
-const Star = ({stars, reviews}) => {
-    // Array.form will return an array of five element using its callback ftn
-    const ratingStar = Array.from({ length: 5 }, (elem, index) => {
-        // debugger; // use this command for debugging
-        return (
-          <span key={index}>
-            {stars >= index + 1 ? (
-              <BsFillStarFill className="icon" />
-            ) : stars >= index + 0.5 ? (
-              <BsStarHalf className="icon" />
-            ) : (
-              <BsStar className="icon empty-icon" />
-            )}
-          </span>
-        );
-      });
-  
-  
-  
- return (
+import React from "react";
+import { BsFillStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import styled from "styled-components";
+const Star = ({ stars, reviews }) => {
+  // Array.form will return an array of five element using its callback ftn
+  const ratingStar = Array.from({ length: 5 }, (elem, index) => {
+    // debugger; // use this command for debugging
+    return (
+      <span key={index}>
+        {stars >= index + 1 ? (
+          <BsFillStarFill className="icon" />
+        ) : stars >= index + 0.5 ? (
+          <BsStarHalf className="icon" />
+        ) : (
+          <BsStar className="icon empty-icon" />
+        )}
+      </span>
+    );
+  });
+
+  return (
     <Wrapper>
       <div className="icon-style">
         {ratingStar}
         <p>({reviews} customer reviews)</p>
       </div>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.section`
   .icon-style {
@@ -50,4 +48,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default Star
+export default Star;

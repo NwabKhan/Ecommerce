@@ -1,9 +1,6 @@
-import HeroSection from '../components/herosection/HeroSection'
+import HeroSection from "../components/herosection/HeroSection";
 const About = () => {
-  return (
-    <HeroSection title = "Haseeb Webiste" />
+  return <HeroSection title="Haseeb Webiste" />;
+};
 
-  )
-}
-
-export default About
+export default About;

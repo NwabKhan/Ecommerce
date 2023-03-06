@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
+
 import reducer from "../reducer/ProductReducer";
 import { data } from "../resources/productsData";
 import { singleProductData } from "../resources/singleProductData";
@@ -13,38 +14,41 @@ const initailState = {
   products: [],
   featuredProducts: [],
   isSingleLoading: false,
-  singleProduct: []
+  singleProduct: [],
 };
 
 const AppProvider = ({ children }) => {
   //Dispatch is like a function call
   const [state, dispatch] = useReducer(reducer, initailState);
+  
   const getProduct = () => {
     try {
-      dispatch({ type: "Loading" });
+      dispatch({ type: "LOADING" });
       const products = data;
-      dispatch({ type: "setData", payload: products });
+      dispatch({ type: "SET_DATA", payload: products });
+    } catch (err) {
+      dispatch({ type: "ERROR" });
+    }
+  };
+
+  const getSingleProduct = (id) => {
+    try {
+      dispatch({ type: "IS_SINGLE_LOADING" });
+      const singleProduct = singleProductData;
+      dispatch({ type: "SET_SINGLE_PRODUCT", payload: singleProduct, id: id });
     } catch (err) {
       dispatch({ type: "Error" });
     }
   };
-  
-  const getSingleProduct = (id)=>{
-    try {
-      dispatch({ type: "isSingleLoading" });
-      const singleProduct = singleProductData
-      dispatch({ type: "setSingleProduct", payload: singleProduct, id: id });
-    } catch (err) {
-      dispatch({ type: "Error" });
-    }
-  }
 
   useEffect(() => {
     getProduct();
   }, []);
 
   return (
-    <AppContext.Provider value={{ ...state, getSingleProduct }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, getSingleProduct }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

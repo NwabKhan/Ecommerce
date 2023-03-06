@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { useFilterHook } from "../../context/FilterContext";
 import styled from "styled-components";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 
+import { useFilterHook } from "../../context/FilterContext";
+
 const SortSection = () => {
-  const { grid_view, setGridView, setListView, filterProducts, sorting } = useFilterHook();
+  const { grid_view, setGridView, setListView, filterProducts, sorting } =
+    useFilterHook();
 
   return (
     <Wrapper className="sort-section">
       <div className="sorting-list--grid">
-
         <button
           className={grid_view ? "active sort-btn" : "sort-btn"}
           onClick={setGridView} // this ftn will call in FilterContext and make grid_view true
@@ -23,14 +24,18 @@ const SortSection = () => {
         >
           <BsList className="icon" />
         </button>
-
       </div>
       <div className="product-data">
         <p>{`${filterProducts.length} Products Available`}</p>
       </div>
       <div className="sort-selection">
         <form action="#">
-          <select id = 'sort' name = 'sort' className="sort-selection--style" onClick={(e)=>sorting(e)}>
+          <select
+            id="sort"
+            name="sort"
+            className="sort-selection--style"
+            onClick={(e) => sorting(e)}
+          >
             <option value="lowest">Price(lowest)</option>
             <option disabled></option>
             <option value="highest">Price(highest)</option>
