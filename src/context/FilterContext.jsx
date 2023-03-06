@@ -13,7 +13,10 @@ const initialState = {
         text : "",
         category: 'all',
         company: 'all',
-        color: 'all'
+        color: 'all',
+        price: 0,
+        maxPrice: 0,
+        minPrice: 0
     }
 }
 const FilterContextProvider = ({children})=>{
@@ -40,6 +43,10 @@ const FilterContextProvider = ({children})=>{
         const name = event.target.name
         dispatch({type: "updateFilterValue", payload: {value, name}})
     }
+    const clearFilters = ()=>{
+        dispatch({type: "CLEAR_FILTERS"})
+
+    }
     //to sort the products according to sorting value. i.e highest cost(ascending)
     //run this useEffect when even the sorting-value or the text(in filter) changes
     useEffect(()=>{ 
@@ -52,7 +59,7 @@ const FilterContextProvider = ({children})=>{
         dispatch({type: "LoadFilterProduct", payload: products})
     }, [products])
     return(
-        <FilterContext.Provider value={{...state, setGridView, setListView, sorting, updateFilterValue, }}>{children}</FilterContext.Provider>
+        <FilterContext.Provider value={{...state, setGridView, setListView, sorting, updateFilterValue, clearFilters }}>{children}</FilterContext.Provider>
     )
 }
 

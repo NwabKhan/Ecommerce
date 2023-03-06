@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { useFilterHook } from "../../context/FilterContext";
 import {FaCheck} from "react-icons/fa"
+import FormatPrice from '../featureproduct/FormatPrice'
+import {Button} from '../../styles/Button'
 const FilterSection = () => {
   const {
-    filters: { text, category, color },
+    filters: { text, category, color, price, maxPrice, minPrice },
     updateFilterValue,
     allProducts,
+    clearFilters
   } = useFilterHook();
   //To get an array of unique data for each category like all, mobilem laptop etc.
   const getUniqueData = (data, property) => {
@@ -112,6 +115,27 @@ const FilterSection = () => {
             );
           })}
         </div>
+
+        <div className="filter_price">
+        <h3>Price</h3>
+        <p>
+          <FormatPrice price={price} />
+        </p>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          value={price}
+          onChange={updateFilterValue}
+        />
+      </div>
+
+      <div className="filter-clear">
+        <Button className="btn" onClick={clearFilters}>
+          Clear Filters
+        </Button>
+      </div>
       </div>
       </div>
     </Wrapper>

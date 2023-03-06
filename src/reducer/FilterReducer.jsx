@@ -1,10 +1,39 @@
 const FilterReducer = (state, action) => {
   switch (action.type) {
     case "LoadFilterProduct":
+      // 1st method
+      // getting the aaray of the prices of products for finding
+      //max_pice(used in range filter section). Directly using max
+      //we cannot find max number since max does not accest array.(can find in object).
+      //so we can use apply function which accept an array as parameter, using this code
+      // const max_price = Math.max.apply(null,priceArray)
+
+      // 2nd method
+      //We can also use spread operator in Math.max to get the max value
+      //let max_value = Math.max(...priceArray)
+
+      // 3nd method(preffered)
+      //We can also find max number in array using reducer method, but it will
+      //cause error because we don't have initial value, so put zero(0) after
+      //Math.max(initailPrice, currentPrice) as used below
+
+      let priceArray = action.payload.map(
+        (currentProduct) => currentProduct.price
+      );
+      const max_price = priceArray.reduce(
+        (initailPrice, currentPrice) => Math.max(initailPrice, currentPrice),
+        0
+      );
+
       return {
         ...state,
         filterProducts: [...action.payload], //making the copy of original data
         allProducts: [...action.payload],
+        filters: {
+          ...state.filters,
+          price: max_price,
+          maxPrice: max_price,
+        },
       };
 
     case "GridView":
@@ -72,21 +101,24 @@ const FilterReducer = (state, action) => {
       let { filterProducts } = state;
       let temp = [...filterProducts];
 
-      const { text, category, company, color } = state.filters;
+      const { text, category, company, color, price } = state.filters;
       if (text) {
-        filterdProducts = temp.filter((currentProduct) => //in arrow frn if we have single line return 
-          currentProduct.name.toLowerCase().includes(text)//then there is no need for curly brackets and return keyword
+        filterdProducts = temp.filter(
+          (
+            currentProduct //in arrow frn if we have single line return
+          ) => currentProduct.name.toLowerCase().includes(text) //then there is no need for curly brackets and return keyword
         );
       }
       if (text === "") {
         filterdProducts = temp;
       }
-      if (category !== "all") { //if (category is anythind except 'all') do this
+      if (category !== "all") {
+        //if (category is anythind except 'all') do this
         filterdProducts = filterdProducts.filter(
           (currentProduct) => currentProduct.category === category
         );
       }
-      if (company !== "all") { 
+      if (company !== "all") {
         filterdProducts = filterdProducts.filter(
           (currentProduct) => currentProduct.company === company
         );
@@ -96,10 +128,34 @@ const FilterReducer = (state, action) => {
           currentProduct.colors.includes(color)
         );
       }
+      if (price === 0) {
+        filterdProducts = filterdProducts.filter(
+          (currentProduct) => currentProduct.price === price
+        );
+      } else {
+        filterdProducts = filterdProducts.filter(
+          (currentProduct) => currentProduct.price <= price
+        );
+      }
 
       return {
         ...state,
         filterProducts: filterdProducts,
+      };
+
+    case "CLEAR_FILTERS":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          text: "",
+          category: "all",
+          company: "all",
+          color: "all",
+          price: 0,
+          maxPrice: 0,
+          minPrice: 0,
+        },
       };
     default:
       return state;

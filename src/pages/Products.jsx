@@ -3,7 +3,6 @@ import styled from "styled-components";
 import FilterSection from "../components/producthelpers/FilterSection";
 import ProductList from "../components/producthelpers/productlist/ProductList";
 import SortSection from "../components/producthelpers/SortSection";
-import {useFilterHook} from '../context/FilterContext'
 const Products = () => {
   return (
     <Wrapper>
