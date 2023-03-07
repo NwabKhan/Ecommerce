@@ -1,9 +1,29 @@
 import styled from "styled-components";
+import {useCartHook} from '../context/CartContext'
 
+import CartItem from "../components/addtocart/CartItem";
 const Cart = () => {
+  const {cart} = useCartHook()
   return (
     <div>
-      <Wrapper>Good</Wrapper>
+      <Wrapper>
+      <div className="container">
+        <div className="cart_heading grid grid-five-column">
+          <p>Item</p>
+          <p className="cart-hide">Price</p>
+          <p>Quantity</p>
+          <p className="cart-hide">Subtotal</p>
+          <p>Remove</p>
+        </div>
+        <hr />
+
+        <div className="cart-item">
+          {cart.map((curElem) => { //Passing all the data to cart-item
+            return <CartItem key={curElem.id} {...curElem} />;
+          })}
+        </div>
+      </div>
+      </Wrapper>
     </div>
   );
 };

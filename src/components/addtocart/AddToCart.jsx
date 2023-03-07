@@ -3,10 +3,14 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 
+import { useCartHook } from "../../context/CartContext";
 import { Button } from "../../styles/Button";
 import CartAmountToggle from "./CartAmountToggle";
 
 const AddToCart = ({ singleProduct }) => {
+
+  const {addToCart} = useCartHook()
+
   const { stock, colors, id } = singleProduct; // Destructing the data from finalData
   const [color, setColor] = useState(colors[0]); // using this to change the active color onclick
   const [amount, setAmount] = useState(1); //For the quantity of the product
@@ -50,7 +54,7 @@ const AddToCart = ({ singleProduct }) => {
         setDecrease={setDecrease}
       />
 
-      <NavLink to="/cart">
+      <NavLink to="/cart" onClick={()=>addToCart(id, color, amount, singleProduct)}>
         <Button>Add To Cart</Button>
       </NavLink>
     </Wrapper>

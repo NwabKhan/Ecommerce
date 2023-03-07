@@ -94,7 +94,7 @@ const Nav = styled.nav`
         font-weight: 500;
         text-transform: uppercase;
         color: ${({ theme }) => theme.colors.black};
-        transition: color 0.3s linear;
+        transition: color 0.3s linear; //how fast navlink color come on hover
       }
       &:hover,
       &:active {
@@ -190,7 +190,7 @@ const Nav = styled.nav`
       transform: translateX(0);
       z-index: 999;
       transform-origin: none;
-      transition: all 3s linear;
+      transition: all 0.5s linear; //How fast/slow toggle bar will show/close
       .navbar-link {
         font-size: 4rem;
       }
