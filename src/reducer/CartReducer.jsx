@@ -64,53 +64,56 @@ const CartReducer = (state, action) => {
         cart: [],
       };
 
-    case "SET_INCREASE":
-      //first we find out on chich elemts use want to increase
-      let updateExistingQuantity = state.cart.map((currentProduct)=>{
-        if (currentProduct.id === action.payload){
-          let newQuantity = currentProduct.quantity + 1
-          // if(newQuantity >= currentProduct.stock){
-          //   newQuantity = currentProduct.stock
-          //   return newQuantity
-          // }
-          return{
-            ...currentProduct,
-            quantity : newQuantity
-          }
-        }else{
-          return{
-            currentProduct
-          }
-        }
-      })
-      return{
+    case "TOTAL_CART_ITEMS":
+      let cart_total_items = state.cart.reduce((accumulator, currentValue) => {
+        let { quantity } = currentValue;
+        accumulator = accumulator + quantity;
+        return accumulator;
+      }, 0);
+      return {
         ...state,
-        cart: updateExistingQuantity
-      }
+        total_item: cart_total_items,
+      };
+
+    case "SET_INCREASE":
+      let updatedProduct = state.cart.map((curElem) => {
+        if (curElem.id === action.payload) {
+          
+          let incAmount = curElem.quantity + 1;
+  
+          if (incAmount >= curElem.stock) {
+            incAmount = curElem.quantity;
+          }
+  
+          return {
+            ...curElem,
+            quantity: incAmount,
+          };
+        } else {
+          return curElem;
+        }
+      });
+      return { ...state, cart: updatedProduct };
 
     case "SET_DECREASE":
-      //first we find out on chich elemts use want to increase
-      let updateCartQuantity = state.cart.map((currentProduct)=>{
-        if (currentProduct.id === action.payload){
-          let newQuantity = currentProduct.quantity - 1
-          // if(newQuantity >= currentProduct.stock){
-          //   newQuantity = currentProduct.stock
-          //   return newQuantity
-          // }
-          return{
-            ...currentProduct,
-            quantity : newQuantity
+      let updateProduct = state.cart.map((curElem) => {
+        if (curElem.id === action.payload) {
+          let decAmount = curElem.quantity - 1;
+  
+          if (decAmount <= 1) {
+            decAmount = 1;
           }
-        }else{
-          return{
-            currentProduct
-          }
+  
+          return {
+            ...curElem,
+            quantity: decAmount,
+          };
+        } else {
+          return curElem;
         }
-      })
-      return{
-        ...state,
-        cart: updateCartQuantity
-      }
+      });
+      return { ...state, cart: updateProduct };
+
     default:
       return state;
   }

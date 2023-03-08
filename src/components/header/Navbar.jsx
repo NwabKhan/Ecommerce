@@ -7,9 +7,13 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 
-const Navbar = () => {
-  const [toggle, setToggle] = useState(false);
+import {useCartHook} from '../../context/CartContext'
 
+const Navbar = () => {
+
+  //to update the value on cart icon(dynammically)
+  const {total_item} = useCartHook()
+  const [toggle, setToggle] = useState(false);
   return (
     <Nav>
       <div className={toggle ? "active" : ""}>
@@ -57,7 +61,7 @@ const Navbar = () => {
               className="navbar-link cart-icon-link"
             >
               <AiOutlineShoppingCart className="cart-icon" />
-              <span className="cart-items-count">4</span>
+              <span className="cart-items-count">{total_item}</span>
             </NavLink>
           </li>
         </ul>

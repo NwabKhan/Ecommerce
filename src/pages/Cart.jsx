@@ -12,43 +12,43 @@ const Cart = () => {
   }, []);
   const { cart, clearCart } = useCartHook();
   if (cart.length === 0) {
-    return <EmptyDiv>
-    <h3>No Items in Cart</h3>
-  </EmptyDiv>;
+    return (
+      <EmptyDiv>
+        <h3>No Items in Cart</h3>
+      </EmptyDiv>
+    );
   } else {
     return (
-      <div>
-        <Wrapper>
-          <div className="container">
-            <div className="cart_heading grid grid-five-column">
-              <p>Item</p>
-              <p className="cart-hide">Price</p>
-              <p>Quantity</p>
-              <p className="cart-hide">Subtotal</p>
-              <p>Remove</p>
-            </div>
-            <hr />
-
-            <div className="cart-item">
-              {cart.map((curElem) => {
-                //Passing all the data to cart-item
-                return <CartItem key={curElem.id} {...curElem} />;
-              })}
-            </div>
-
-            <hr />
-
-            <div className="cart-two-button">
-              <NavLink to="/products">
-                <Button> continue Shopping </Button>
-              </NavLink>
-              <Button className="btn btn-clear" onClick={clearCart}>
-                clear cart
-              </Button>
-            </div>
+      <Wrapper>
+        <div className="container">
+          <div className="cart_heading grid grid-five-column">
+            <p>Item</p>
+            <p className="cart-hide">Price</p>
+            <p>Quantity</p>
+            <p className="cart-hide">Subtotal</p>
+            <p>Remove</p>
           </div>
-        </Wrapper>
-      </div>
+          <hr />
+
+          <div className="cart-item">
+            {cart.map((curElem) => {
+              //Passing all the data to cart-item
+              return <CartItem key={curElem.id} {...curElem} />;
+            })}
+          </div>
+
+          <hr />
+
+          <div className="cart-two-button">
+            <NavLink to="/products">
+              <Button> continue Shopping </Button>
+            </NavLink>
+            <Button className="btn btn-clear" onClick={clearCart}>
+              clear cart
+            </Button>
+          </div>
+        </div>
+      </Wrapper>
     );
   }
 };

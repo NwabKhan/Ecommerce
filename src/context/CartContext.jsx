@@ -19,8 +19,6 @@ const initialState = {
   // cart: [],
   cart: getLocalCartData(), //getting the cart data that we store in localStorage
   total_item: "",
-  total_amount: "",
-  shipping_fee: 9000,
 };
 
 const CartContextProvider = ({ children }) => {
@@ -44,6 +42,7 @@ const CartContextProvider = ({ children }) => {
   //So, we have to convert cart array to string using JSON.stringify
   useEffect(()=>{
     localStorage.setItem("JunaidStore", JSON.stringify(state.cart))
+    dispatch({type:"TOTAL_CART_ITEMS"}) // this is used in header/Navbar
   }, [state.cart])
 
   //to remove product from cart
@@ -52,6 +51,7 @@ const CartContextProvider = ({ children }) => {
   }
 
   //Increase and decrease the quantity in Cart pasges
+  //These are used in CartItem Page
   const setIncrease = (id)=>{
     dispatch({type: "SET_INCREASE", payload: id})
   }

@@ -7,13 +7,6 @@ import { useCartHook } from "../../context/CartContext";
 //WE are using this component in Cart Page
 const CartItem = ({ id, name, image, color, price, quantity }) => {
   const { removeItem, setDecrease, setIncrease} = useCartHook();
-  // const setDecrease = () => {
-  //   amount > 1 ? setAmount(amount - 1) : setAmount(1);
-  // };
-
-  // const setIncrease = () => {
-  //   amount < stock ? setAmount(amount + 1) : setAmount(stock);
-  // };
 
   return (
     <div className="cart_heading grid grid-five-column">
