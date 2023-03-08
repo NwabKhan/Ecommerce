@@ -15,6 +15,10 @@ const CartReducer = (state, action) => {
         let updateExistingProduct = state.cart.map(currentProduct =>{
           if(currentProduct.id === id+color){
             let newQuantity = currentProduct.quantity + quantity
+            //checking if the newQuantity is becoming > then the stock
+            if(newQuantity >= currentProduct.stock){
+              newQuantity = currentProduct.stock
+            }
             return{
               ...currentProduct,
               quantity : newQuantity
@@ -59,6 +63,54 @@ const CartReducer = (state, action) => {
         ...state,
         cart: [],
       };
+
+    case "SET_INCREASE":
+      //first we find out on chich elemts use want to increase
+      let updateExistingQuantity = state.cart.map((currentProduct)=>{
+        if (currentProduct.id === action.payload){
+          let newQuantity = currentProduct.quantity + 1
+          // if(newQuantity >= currentProduct.stock){
+          //   newQuantity = currentProduct.stock
+          //   return newQuantity
+          // }
+          return{
+            ...currentProduct,
+            quantity : newQuantity
+          }
+        }else{
+          return{
+            currentProduct
+          }
+        }
+      })
+      return{
+        ...state,
+        cart: updateExistingQuantity
+      }
+
+    case "SET_DECREASE":
+      //first we find out on chich elemts use want to increase
+      let updateCartQuantity = state.cart.map((currentProduct)=>{
+        if (currentProduct.id === action.payload){
+          let newQuantity = currentProduct.quantity - 1
+          // if(newQuantity >= currentProduct.stock){
+          //   newQuantity = currentProduct.stock
+          //   return newQuantity
+          // }
+          return{
+            ...currentProduct,
+            quantity : newQuantity
+          }
+        }else{
+          return{
+            currentProduct
+          }
+        }
+      })
+      return{
+        ...state,
+        cart: updateCartQuantity
+      }
     default:
       return state;
   }

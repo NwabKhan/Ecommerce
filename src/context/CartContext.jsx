@@ -51,8 +51,16 @@ const CartContextProvider = ({ children }) => {
     dispatch({type: "REMOVE_ITEM", payload: id})
   }
 
+  //Increase and decrease the quantity in Cart pasges
+  const setIncrease = (id)=>{
+    dispatch({type: "SET_INCREASE", payload: id})
+  }
+  const setDecrease = (id)=>{
+    dispatch({type: "SET_DECREASE", payload: id})
+  }
+
   return (
-    <CartContext.Provider value={{ ...state, addToCart, removeItem, clearCart }}>
+    <CartContext.Provider value={{ ...state, addToCart, removeItem, clearCart, setIncrease, setDecrease }}>
       {children}
     </CartContext.Provider>
   );
