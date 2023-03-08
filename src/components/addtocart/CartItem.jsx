@@ -1,6 +1,6 @@
 import React from "react";
 import FormatPrice from "../featureproduct/FormatPrice";
-import CartAmountToggle from "./CartAmountToggle";
+import CartAmountToggle from "./CartQuantityToggle";
 import { FaTrash } from "react-icons/fa";
 import { useCartHook } from "../../context/CartContext";
 

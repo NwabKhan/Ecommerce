@@ -1,6 +1,9 @@
 import styled from "styled-components";
-
+import { useEffect } from "react";
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Wrapper>
       <h2 className="common-heading">Contact Page</h2>

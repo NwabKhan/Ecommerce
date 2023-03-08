@@ -1,32 +1,69 @@
+import { useEffect } from "react";
+import { useCartHook } from "../context/CartContext";
 import styled from "styled-components";
-import {useCartHook} from '../context/CartContext'
+import { NavLink } from "react-router-dom";
 
+import { Button } from "../styles/Button";
 import CartItem from "../components/addtocart/CartItem";
-const Cart = () => {
-  const {cart} = useCartHook()
-  return (
-    <div>
-      <Wrapper>
-      <div className="container">
-        <div className="cart_heading grid grid-five-column">
-          <p>Item</p>
-          <p className="cart-hide">Price</p>
-          <p>Quantity</p>
-          <p className="cart-hide">Subtotal</p>
-          <p>Remove</p>
-        </div>
-        <hr />
 
-        <div className="cart-item">
-          {cart.map((curElem) => { //Passing all the data to cart-item
-            return <CartItem key={curElem.id} {...curElem} />;
-          })}
-        </div>
+const Cart = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const { cart, clearCart } = useCartHook();
+  if (cart.length === 0) {
+    return <EmptyDiv>
+    <h3>No Items in Cart</h3>
+  </EmptyDiv>;
+  } else {
+    return (
+      <div>
+        <Wrapper>
+          <div className="container">
+            <div className="cart_heading grid grid-five-column">
+              <p>Item</p>
+              <p className="cart-hide">Price</p>
+              <p>Quantity</p>
+              <p className="cart-hide">Subtotal</p>
+              <p>Remove</p>
+            </div>
+            <hr />
+
+            <div className="cart-item">
+              {cart.map((curElem) => {
+                //Passing all the data to cart-item
+                return <CartItem key={curElem.id} {...curElem} />;
+              })}
+            </div>
+
+            <hr />
+
+            <div className="cart-two-button">
+              <NavLink to="/products">
+                <Button> continue Shopping </Button>
+              </NavLink>
+              <Button className="btn btn-clear" onClick={clearCart}>
+                clear cart
+              </Button>
+            </div>
+          </div>
+        </Wrapper>
       </div>
-      </Wrapper>
-    </div>
-  );
+    );
+  }
 };
+
+const EmptyDiv = styled.div`
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  h3 {
+    font-size: 4.2rem;
+    text-transform: capitalize;
+    font-weight: 300;
+    color: ${({ theme }) => theme.colors.btn};
+  }
+`;
 
 const Wrapper = styled.section`
   padding: 9rem 0;
