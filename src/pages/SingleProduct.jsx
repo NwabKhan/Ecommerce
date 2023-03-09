@@ -38,12 +38,12 @@ const SingleProduct = () => {
       company,
       price,
       description,
-      category,
+      // category,
       stock,
       stars,
       reviews,
       image,
-      colors,
+      // colors,
     } = finalData;
 
     return (

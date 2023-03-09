@@ -53,6 +53,7 @@ const Footer = () => {
                   <a
                     href="https://api.whatsapp.com/message/PUDIO2WUSPQ3I1?autoload=1&app_absent=0"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <BsWhatsapp className="icons" />
                   </a>
@@ -61,6 +62,7 @@ const Footer = () => {
                   <a
                     href="https://www.facebook.com/profile.php?id=100090020419739"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <FaFacebookF className="icons" />
                   </a>
@@ -69,6 +71,7 @@ const Footer = () => {
                   <a
                     href="https://www.youtube.com/@routineinformation3901"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <FaYoutube className="icons" />
                   </a>
