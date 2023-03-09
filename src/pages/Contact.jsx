@@ -6,7 +6,7 @@ const Contact = () => {
   }, []);
   return (
     <Wrapper>
-      <h2 className="common-heading">Contact Page</h2>
+      <h2 className="common-heading">Contact Now</h2>
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26587.074588806536!2d73.03401030380681!3d33.59533136428672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df94834d87f5a3%3A0x506e17bedd22f2e7!2sSaddar%2C%20Rawalpindi%2C%20Punjab%2046000%2C%20Pakistan!5e0!3m2!1sen!2s!4v1677518783032!5m2!1sen!2s"
         width="100%"
@@ -19,6 +19,7 @@ const Contact = () => {
 
       <div className="container">
         <div className="contact-form">
+        <h3 className="suggestion">We appretiate your valuable suggestions</h3>
           <form
             action="https://formspree.io/f/mwkjbprr"
             method="POST"
@@ -61,7 +62,11 @@ const Wrapper = styled.div`
 
   .container {
     margin-top: 6rem;
-
+    .suggestion{
+      margin-bottom: 2rem;
+      color: grey;
+      font-size: 2rem
+    }
     .contact-form {
       max-width: 50rem;
       margin: auto;

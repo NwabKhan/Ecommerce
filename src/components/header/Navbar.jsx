@@ -27,15 +27,7 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/about"
-              onClick={() => setToggle(false)}
-              className="navbar-link"
-            >
-              About
-            </NavLink>
-          </li>
+          
           <li>
             <NavLink
               to="/products"
@@ -52,6 +44,15 @@ const Navbar = () => {
               className="navbar-link"
             >
               Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              onClick={() => setToggle(false)}
+              className="navbar-link"
+            >
+              About
             </NavLink>
           </li>
           <li>

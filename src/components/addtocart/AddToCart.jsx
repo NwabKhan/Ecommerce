@@ -8,8 +8,7 @@ import { Button } from "../../styles/Button";
 import CartAmountToggle from "./CartAmountToggle";
 
 const AddToCart = ({ singleProduct }) => {
-
-  const {addToCart} = useCartHook()
+  const { addToCart } = useCartHook();
 
   const { stock, colors, id } = singleProduct; // Destructing the data from finalData
   const [color, setColor] = useState(colors[0]); // using this to change the active color onclick
@@ -54,9 +53,17 @@ const AddToCart = ({ singleProduct }) => {
         setDecrease={setDecrease}
       />
 
-      <NavLink to="/cart" onClick={()=>addToCart(id, color, amount, singleProduct)}>
-        <Button>Add To Cart</Button>
-      </NavLink>
+      <div className="cart-two-button">
+        <NavLink>
+          <Button>Buy Now</Button>
+        </NavLink>
+        <NavLink
+          to="/cart"
+          onClick={() => addToCart(id, color, amount, singleProduct)}
+        >
+          <Button className="btn-clear">Add To Cart</Button>
+        </NavLink>
+      </div>
     </Wrapper>
   );
 };
@@ -104,6 +111,13 @@ const Wrapper = styled.section`
     .amount-style {
       font-size: 2.4rem;
       color: ${({ theme }) => theme.colors.btn};
+    }
+  }
+  .cart-two-button {
+    margin-top: 2rem;
+    .btn-clear {
+      margin-left: 5rem;
+      background-color: #e74c3c;
     }
   }
 `;

@@ -18,14 +18,14 @@ const HeroSection = ({ title }) => {
               animi! Suscipit sapiente.
             </p>
 
-            <NavLink>
+            <NavLink to="/products">
               <Button>Shop Now</Button>
             </NavLink>
           </div>
 
           <div className="hero-section-image">
             <figure>
-              <img src="images/hero.jpg" alt="" className="img-style" />
+              <img src="images/pic.jpeg" alt="" className="img-style" />
             </figure>
           </div>
         </div>
@@ -64,18 +64,20 @@ const Wrapper = styled.section`
     position: relative;
     &::after {
       content: "";
-      width: 60%;
-      height: 80%;
+      width: 90%;
+      height: 100%;
       background-color: rgba(81, 56, 238, 0.4);
       position: absolute;
-      left: 50%;
-      top: -5rem;
+      left: 20%;
+      top: -2rem;
+      border-radius: 3px;
       z-index: -1;
     }
   }
   .img-style {
-    width: 100%;
-    height: auto;
+    width: 40rem;
+    height: 40rem;
+    border-radius: 3px;
   }
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     .grid {
