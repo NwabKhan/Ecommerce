@@ -7,12 +7,18 @@ const CartContext = createContext();
 //Also initially localcart is empty, sor we are returning [] to avoid undefined erroe
 const getLocalCartData = () => {
   let localCartData = localStorage.getItem("JunaidStore");
-  if(localCartData === []){
-    return []
-  }
-  else{
-    return JSON.parse(localCartData)
-  }
+  // if(localCartData === []){
+  //   return []
+  // }
+  // else{
+  //   return JSON.parse(localCartData)
+  // }
+  //when we builds, the above code cause error due to undefined, so we can use this
+
+  const parsedData = JSON.parse(localCartData);
+  if(!Array.isArray(parsedData)) return [];
+
+  return parsedData
 };
 
 const initialState = {
