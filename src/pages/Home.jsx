@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <>
-      <HeroSection title="Junaid Webiste" />
+      <HeroSection title="Junaid Khan Webiste" />
       <FeatureProduct />
       <Services />
       <Trusted />
