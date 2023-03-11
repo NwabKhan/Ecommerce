@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
-import { GiReceiveMoney } from "react-icons/gi";
+import { GrStatusGood } from "react-icons/gr";
 import { RiSecurePaymentLine } from "react-icons/ri";
 
 const Services = () => {
@@ -21,7 +21,7 @@ const Services = () => {
             <div className="services-column-2">
               <div>
                 <MdSecurity className="icon" />
-                <h3>Non-contact Shipping</h3>
+                <h3>Secure Shipping</h3>
               </div>
             </div>
             <div className="services-column-2">
@@ -34,8 +34,8 @@ const Services = () => {
 
           <div className="services-3">
             <div>
-              <GiReceiveMoney className="icon" />
-              <h3>Money-back Guaranteed</h3>
+              <GrStatusGood className="icon" />
+              <h3>High Quality Product</h3>
             </div>
           </div>
         </div>
@@ -59,6 +59,7 @@ const Wrapper = styled.section`
     justify-content: center;
     align-content: center;
     background: ${({ theme }) => theme.colors.bg};
+    ${'' /* color: ${({ theme }) => theme.colors.bg}; */}
     text-align: center;
     border-radius: 2rem;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;

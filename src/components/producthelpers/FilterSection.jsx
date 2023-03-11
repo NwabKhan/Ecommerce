@@ -38,7 +38,7 @@ const FilterSection = () => {
 
   return (
     <Wrapper>
-      <div className="filter-search">
+      <div className="filter-search" style={{backgroundColor: '#F6F8FA', padding: '4rem', borderRadius: '1rem'}}>
         <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
@@ -159,6 +159,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 3rem;
+
   h3 {
     padding: 2rem 0;
     font-size: bold;
@@ -167,6 +168,7 @@ const Wrapper = styled.section`
     input {
       padding: 0.6rem 1rem;
       width: 80%;
+      ${'' /* background-color: #76b5c5; */}
     }
   }
   .filter-category {
@@ -177,7 +179,8 @@ const Wrapper = styled.section`
       gap: 1.4rem;
       button {
         border: none;
-        background-color: ${({ theme }) => theme.colors.white};
+        background-color: #F6F8fa;
+        ${'' /* background-color: ${({ theme }) => theme.colors.white}; */}
         text-transform: capitalize;
         cursor: pointer;
         &:hover {
@@ -192,6 +195,8 @@ const Wrapper = styled.section`
   }
   .filter-company--select {
     padding: 0.3rem 1.2rem;
+    background-color: ${({ theme }) => theme.colors.bg}
+
     font-size: 1.6rem;
     color: ${({ theme }) => theme.colors.text};
     text-transform: capitalize;

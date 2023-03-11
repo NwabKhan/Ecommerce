@@ -4,18 +4,16 @@ import styled from "styled-components";
 
 import { Button } from "../../styles/Button";
 
-const HeroSection = ({ title }) => {
+const HeroSection = ({ desc }) => {
   return (
     <Wrapper>
       <div className="container">
         <div className="grid grid-two-column">
           <div className="hero-section-data">
             <p className="intro-data">Welcome to</p>
-            <h1>{title}</h1>
+            <h1>Discountify</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              atque temporibus veniam doloribus libero ad error omnis voluptates
-              animi! Suscipit sapiente.
+              {desc}
             </p>
 
             <NavLink to="/products">

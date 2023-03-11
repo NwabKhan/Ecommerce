@@ -20,6 +20,7 @@ const Contact = () => {
 
       <div className="container">
         <div className="contact-form">
+        <h2 className="feedback">Feedback</h2>
         <h3 className="suggestion">We appretiate your valuable suggestions</h3>
           <form
             action="https://formspree.io/f/mwkjbprr"
@@ -63,6 +64,12 @@ const Wrapper = styled.div`
 
   .container {
     margin-top: 6rem;
+    .feedback{
+      margin-bottom: 2rem;
+      font-weight: 600;
+      font-size: 3rem
+
+    }
     .suggestion{
       margin-bottom: 2rem;
       color: grey;

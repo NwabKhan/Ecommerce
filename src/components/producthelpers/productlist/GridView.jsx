@@ -28,7 +28,7 @@ const Wrapper = styled.section`
     position: relative;
     overflow: hidden;
     transition: all 0.5s linear;
-    &::after {
+    ${'' /* &::after {
       content: "";
       position: absolute;
       top: 0;
@@ -38,12 +38,12 @@ const Wrapper = styled.section`
       background-color: rgba(0, 0, 0, 0.5);
       transition: all 0.2s linear;
       cursor: pointer;
-    }
+    } */}
     &:hover::after {
       width: 100%;
     }
     &:hover img {
-      transform: scale(1.2);
+      transform: scale(1.4);
     }
     img {
       max-width: 90%;

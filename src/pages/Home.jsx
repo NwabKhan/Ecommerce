@@ -10,9 +10,11 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const desc =
+    "We offer the latest and greatest products at unbeatable prices. Our  mission is to provide our customers with the best shopping  experience possible. From fashion and beauty to electronics and  home goods, we have something for everyone. Our selection is  constantly updated, so you'll always find something new and  exciting.";
   return (
     <>
-      <HeroSection title="Junaid Khan Webiste" />
+      <HeroSection desc={desc} />
       <FeatureProduct />
       <Services />
       <Trusted />
