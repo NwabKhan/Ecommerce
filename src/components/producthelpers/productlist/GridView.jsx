@@ -54,7 +54,8 @@ const Wrapper = styled.section`
   }
   ${"" /* these classes coming from Product component */}
   .card {
-    background-color: ${({ theme }) => theme.colors.bg};
+    background-color: ${({ theme }) => theme.colors.product_bg};
+
     border-radius: 1rem;
     .card-data {
       padding: 0 1rem;

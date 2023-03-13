@@ -12,6 +12,7 @@ import SingleProduct from "./pages/SingleProduct";
 import ErrorPage from "./pages/ErrorPage";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import BuyProduct from "./pages/BuyProduct";
 
 const App = () => {
   const mytheme = {
@@ -21,11 +22,12 @@ const App = () => {
       white: "#fff",
       black: " #212529",
       helper: "#8490ff",
-      bg: "#F6F8FA",
+      bg: "#E2EAFC", //all bg change except filter section. Got to /components/producthelpers/FilterScetion
       footer_bg: "#0a1435",
       btn: "rgb(98 84 243)",
       border: "rgba(98, 84, 243, 0.5)",
       hr: "#ffffff",
+      product_bg: '#EDF2FB',
       gradient:
         "linear-gradient(0deg, rgb(132 144 255) 0%, rgb(98 189 252) 100%)",
       shadow:
@@ -52,6 +54,7 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/singleproduct/:id" element={<SingleProduct />} />
+            <Route path="/singleproduct/:id/ordernow" element={<BuyProduct />} />
             <Route path="/*" element={<ErrorPage />} />
           </Route>
         </Routes>

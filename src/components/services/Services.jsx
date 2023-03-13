@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
-import { GrStatusGood } from "react-icons/gr";
+import { VscCheck } from "react-icons/vsc";
 import { RiSecurePaymentLine } from "react-icons/ri";
 
 const Services = () => {
@@ -34,7 +34,7 @@ const Services = () => {
 
           <div className="services-3">
             <div>
-              <GrStatusGood className="icon" />
+              <VscCheck className="icon" />
               <h3>High Quality Product</h3>
             </div>
           </div>

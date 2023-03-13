@@ -64,13 +64,15 @@ const Wrapper = styled.section`
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      background-color: ${({ theme }) => theme.colors.bg};
+
     }
     .icon {
       font-size: 1.6rem;
     }
     .active {
-      background-color: ${({ theme }) => theme.colors.black};
-      color: #fff;
+      background-color: ${({ theme }) => theme.colors.btn};
+      color: ${({ theme }) => theme.colors.bg};
     }
   }
   .sort-selection .sort-selection--style {
@@ -82,6 +84,9 @@ const Wrapper = styled.section`
       height: 2rem;
       padding: 10px;
     }
+  }
+  .product-data p{
+    color: ${({ theme }) => theme.colors.btn};
   }
 `;
 

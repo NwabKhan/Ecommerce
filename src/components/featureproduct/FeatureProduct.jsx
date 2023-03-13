@@ -78,7 +78,7 @@ const Wrapper = styled.section`
     }
   }
   .card {
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.product_bg};
     border-radius: 1rem;
     .card-data {
       padding: 0 2.5rem;

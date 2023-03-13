@@ -54,7 +54,7 @@ const AddToCart = ({ singleProduct }) => {
       />
 
       <div className="cart-two-button">
-        <NavLink>
+        <NavLink to= 'ordernow'>
           <Button>Buy Now</Button>
         </NavLink>
         <NavLink
@@ -119,6 +119,17 @@ const Wrapper = styled.section`
       margin-left: 5rem;
       background-color: #e74c3c;
     }
+  }
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    .cart-two-button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    .btn-clear {
+      margin: 1rem;
+    }
+  }
   }
 `;
 

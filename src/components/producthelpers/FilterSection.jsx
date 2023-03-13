@@ -38,7 +38,7 @@ const FilterSection = () => {
 
   return (
     <Wrapper>
-      <div className="filter-search" style={{backgroundColor: '#F6F8FA', padding: '4rem', borderRadius: '1rem'}}>
+      <div className="filter-search" style={{backgroundColor: '#E2EAFC', padding: '4rem', borderRadius: '1rem'}}>
         <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
@@ -128,21 +128,6 @@ const FilterSection = () => {
             })}
           </div>
 
-          {/* <div className="filter_price">
-        <h3>Price</h3>
-        <p>
-          <FormatPrice price={price} />
-        </p>
-        <input
-          type="range"
-          name="price"
-          min={minPrice}
-          max={maxPrice}
-          value={price}
-          onChange={updateFilterValue}
-        />
-      </div> */}
-
           <div className="filter-clear">
             <Button className="btn" onClick={() => clearFilters()}>
               Clear Filters
@@ -165,10 +150,10 @@ const Wrapper = styled.section`
     font-size: bold;
   }
   .filter-search {
+    color: ${({ theme }) => theme.colors.btn};
     input {
       padding: 0.6rem 1rem;
       width: 80%;
-      ${'' /* background-color: #76b5c5; */}
     }
   }
   .filter-category {
@@ -180,7 +165,7 @@ const Wrapper = styled.section`
       button {
         border: none;
         background-color: #F6F8fa;
-        ${'' /* background-color: ${({ theme }) => theme.colors.white}; */}
+        background-color: ${({ theme }) => theme.colors.bg};
         text-transform: capitalize;
         cursor: pointer;
         &:hover {

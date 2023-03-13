@@ -106,6 +106,10 @@ const Nav = styled.nav`
         color: ${({ theme }) => theme.colors.helper};
       }
     }
+    .active{
+      color: ${({ theme }) => theme.colors.helper} !important;
+      ${'' /* background-color: #F9a8FA !important; */}
+    }
   }
   .mobile-navbar-btn {
     display: none;
