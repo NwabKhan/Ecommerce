@@ -18,51 +18,69 @@ const BuyProduct = () => {
           <h3 className="suggestion">
             We appretiate your valuable suggestions
           </h3>
+
           <form
             action="https://formspree.io/f/mwkjbprr"
             method="POST"
             className="contact-inputs"
           >
-          
-            <input
+           <input
               style={{ display: "none" }}
               type="text"
               placeholder="Product Id"
               name="Product Id"
-              readOnly={id}
+              defaultValue={id || ""}
               autoComplete="off"
             />
-
             <input
               type="text"
-              placeholder="Full Name"
-              name="Full Name"
+              placeholder="Customer Name"
+              name="Customer Name"
               required
               autoComplete="off"
             />
             <input
               type="email"
-              placeholder="Email"
-              name="Email"
+              placeholder="Customer Email"
+              name="Customer Email"
               required
               autoComplete="off"
             />
             <input
-              type="email"
-              placeholder="Address"
-              name="Email"
+              type="number"
+              placeholder="Phone Number"
+              name="Phone Number"
               required
               autoComplete="off"
             />
-            <textarea
+            <input
+              type="number"
+              placeholder="Optional Phone Number"
+              name="Optional Phone Number"
+              autoComplete="off"
+            />
+            <input
               type="text"
-              name="Message"
-              placeholder="Write your message"
+              placeholder="Complete Address(Include Province/State)"
+              name="Complete Address"
               required
               autoComplete="off"
-              cols="30"
-              rows="10"
-            ></textarea>
+            />
+            <input
+              type="text"
+              placeholder="Nearest Landmark"
+              name="Nearest Landmark"
+              required
+              autoComplete="off"
+            />
+            <input
+              type="text"
+              placeholder="Country"
+              name="Country"
+              required
+              autoComplete="off"
+            />
+            
             <input type="submit" value="Send" />
           </form>
         </div>
