@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
+import { BiSearch } from "react-icons/bi";
 
 import { useFilterHook } from "../../context/FilterContext";
 import { Button } from "../../styles/Button";
@@ -38,15 +39,25 @@ const FilterSection = () => {
 
   return (
     <Wrapper>
-      <div className="filter-search" style={{backgroundColor: '#E2EAFC', padding: '4rem', borderRadius: '1rem'}}>
+      <div
+        className="filter-search"
+        style={{
+          backgroundColor: "#E2EAFC",
+          padding: "4rem",
+          borderRadius: "1rem",
+        }}
+      >
         <form onSubmit={(e) => e.preventDefault()}>
-          <input
-            type="text"
-            name="text"
-            value={text}
-            placeholder="SEARCH"
-            onChange={(e) => updateFilterValue(e)}
-          />
+          <div className="search_form">
+            <input
+              type="text"
+              name="text"
+              value={text}
+              placeholder="SEARCH"
+              onChange={(e) => updateFilterValue(e)}
+            />
+            <BiSearch className="search_icon" />
+          </div>
         </form>
 
         <div className="filter-category">
@@ -145,6 +156,27 @@ const Wrapper = styled.section`
   flex-direction: column;
   gap: 3rem;
 
+  .search_form {
+    border: 1px solid ${({ theme }) => theme.colors.btn};
+    background-color: ${({ theme }) => theme.colors.white};
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    input{
+      border: none;
+      outline: none;
+      background-color: ${({ theme }) => theme.colors.white};
+      color: ${({ theme }) => theme.colors.btn};
+      padding: 1.6rem 2.4rem;
+      box-shadow: none ;
+    }
+    .search_icon{
+      cursor: pointer;
+      width: 10rem !important ;
+      height: 2rem !important ;
+    }
+
+}
   h3 {
     padding: 2rem 0;
     font-size: bold;

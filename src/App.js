@@ -13,7 +13,8 @@ import ErrorPage from "./pages/ErrorPage";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import BuyProduct from "./pages/BuyProduct";
-import AfterSubmit from "./pages/AfterSubmit";
+import FormSubmitted from "./pages/FormSubmitted";
+import SuggestionSubmitted from "./pages/SuggestionSubmitted";
 
 const App = () => {
   const mytheme = {
@@ -52,12 +53,13 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<Contact />} /> 
+            <Route path="/contact/suggestionsubmitted" element={<SuggestionSubmitted />} /> 
             <Route path="/cart" element={<Cart />} />
             <Route path="/singleproduct/:id" element={<SingleProduct />} />
             <Route path="/singleproduct/:id/ordernow" element={<BuyProduct />} />
+            <Route path="/singleproduct/:id/ordernow/formsubmitted" element={<FormSubmitted />} />
             <Route path="/*" element={<ErrorPage />} />
-            <Route path="/aftersubmit" element={<AfterSubmit />} />
           </Route>
         </Routes>
         <Footer />

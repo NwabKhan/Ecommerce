@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import emailjs from '@emailjs/browser';
+import { useNavigate, useParams } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 
 const BuyProduct = () => {
   const { id } = useParams();
@@ -9,37 +9,41 @@ const BuyProduct = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  const navigateForm = useNavigate(); // Using this to navigate, when Form is subitted
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_tml8p8z', 'template_2hvg1nj', e.target, 'uVsLxHxBHY-6G5nzA')
-      .then((result) => {
+    emailjs
+      .sendForm(
+        "service_tml8p8z",
+        "template_2hvg1nj",
+        e.target,
+        "uVsLxHxBHY-6G5nzA"
+      )
+      .then(
+        (result) => {
           console.log(result.text);
-      }, (error) => {
+        },
+        (error) => {
           console.log(error.text);
-      });
+        }
+      );
+    navigateForm("./formsubmitted"); //navigate here on form submisstion
   };
 
   return (
     <Wrapper>
-      <h2 className="common-heading">kindly Fill the details</h2>
+      <h2 className="common-heading">Kindly Fill Your Details</h2>
 
       <div className="container">
         <div className="contact-form">
-          <h2 className="feedback">Feedback</h2>
+          {/* <h2 className="feedback">Feedback</h2>
           <h3 className="suggestion">
             We appretiate your valuable suggestions
-          </h3>
+          </h3> */}
 
-          <form
-            method="POST"
-            onSubmit={sendEmail}
-            className="contact-inputs"
-          >
-            {console.log("Id is: ", id)}
-
-           <input
+          <form method="POST" onSubmit={sendEmail} className="contact-inputs">
+            <input
               style={{ display: "none" }}
               type="text"
               placeholder="Product Id"
@@ -88,6 +92,14 @@ const BuyProduct = () => {
               required
               autoComplete="off"
             />
+
+            <input
+              type="text"
+              placeholder="City"
+              name="city"
+              required
+              autoComplete="off"
+            />
             <input
               type="text"
               placeholder="Country"
@@ -95,7 +107,7 @@ const BuyProduct = () => {
               required
               autoComplete="off"
             />
-            
+
             <input type="submit" value="Send" />
           </form>
         </div>
@@ -109,8 +121,8 @@ const Wrapper = styled.div`
   text-align: center;
 
   .container {
-    margin-top: 6rem;
-    .feedback {
+    ${'' /* margin-top: 1rem; */}
+    ${'' /* .feedback {
       margin-bottom: 2rem;
       font-weight: 600;
       font-size: 3rem;
@@ -119,13 +131,16 @@ const Wrapper = styled.div`
       margin-bottom: 2rem;
       color: grey;
       font-size: 2rem;
-    }
+    } */}
     .contact-form {
       max-width: 50rem;
       margin: auto;
 
       .contact-inputs {
+        padding: 2rem 4rem;
         display: flex;
+   box-shadow: ${({ theme }) => theme.colors.shadowSupport};
+
         flex-direction: column;
         gap: 3rem;
 

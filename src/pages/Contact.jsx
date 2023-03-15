@@ -1,9 +1,24 @@
 import styled from "styled-components";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import emailjs from '@emailjs/browser';
+
 const Contact = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const navigateForm = useNavigate() // Using this to navigate, when Form is subitted
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_tml8p8z', 'template_2fiskvn', e.target, 'uVsLxHxBHY-6G5nzA')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      navigateForm('./suggestionsubmitted') //navigate here on form submisstion
+  };
   return (
     <Wrapper>
       <h2 className="common-heading">Contact Now</h2>
@@ -23,27 +38,28 @@ const Contact = () => {
         <h2 className="feedback">Feedback</h2>
         <h3 className="suggestion">We appretiate your valuable suggestions</h3>
           <form
-            action="https://formspree.io/f/mwkjbprr"
+            // action="https://formspree.io/f/mwkjbprr"
             method="POST"
+            onSubmit={sendEmail}
             className="contact-inputs"
           >
             <input
               type="text"
               placeholder="Username"
-              name="Username"
+              name="name"
               required
               autoComplete="off"
             />
             <input
               type="email"
               placeholder="Email"
-              name="Email"
+              name="email"
               required
               autoComplete="off"
             />
             <textarea
               type="text"
-              name="Message"
+              name="message"
               placeholder="Write your message"
               required
               autoComplete="off"
@@ -83,6 +99,9 @@ const Wrapper = styled.div`
         display: flex;
         flex-direction: column;
         gap: 3rem;
+        padding: 3rem;
+        box-shadow: ${({ theme }) => theme.colors.shadowSupport};
+
 
         input[type="submit"] {
           cursor: pointer;
