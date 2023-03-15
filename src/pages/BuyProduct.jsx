@@ -1,13 +1,26 @@
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import emailjs from '@emailjs/browser';
 
 const BuyProduct = () => {
   const { id } = useParams();
-  console.log("Id on Buy product is: ", id);
+  // console.log("Id on Buy product is: ", id);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_tml8p8z', 'template_2hvg1nj', e.target, 'uVsLxHxBHY-6G5nzA')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
+
   return (
     <Wrapper>
       <h2 className="common-heading">kindly Fill the details</h2>
@@ -20,63 +33,65 @@ const BuyProduct = () => {
           </h3>
 
           <form
-            action="https://formspree.io/f/mwkjbprr"
             method="POST"
+            onSubmit={sendEmail}
             className="contact-inputs"
           >
+            {console.log("Id is: ", id)}
+
            <input
               style={{ display: "none" }}
               type="text"
               placeholder="Product Id"
-              name="Product Id"
+              name="id"
               defaultValue={id || ""}
               autoComplete="off"
             />
             <input
               type="text"
               placeholder="Customer Name"
-              name="Customer Name"
+              name="name"
               required
               autoComplete="off"
             />
             <input
               type="email"
               placeholder="Customer Email"
-              name="Customer Email"
+              name="email"
               required
               autoComplete="off"
             />
             <input
               type="number"
               placeholder="Phone Number"
-              name="Phone Number"
+              name="phone_number"
               required
               autoComplete="off"
             />
             <input
               type="number"
               placeholder="Optional Phone Number"
-              name="Optional Phone Number"
+              name="optional_number"
               autoComplete="off"
             />
             <input
               type="text"
               placeholder="Complete Address(Include Province/State)"
-              name="Complete Address"
+              name="address"
               required
               autoComplete="off"
             />
             <input
               type="text"
               placeholder="Nearest Landmark"
-              name="Nearest Landmark"
+              name="near_address"
               required
               autoComplete="off"
             />
             <input
               type="text"
               placeholder="Country"
-              name="Country"
+              name="country"
               required
               autoComplete="off"
             />

@@ -13,6 +13,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import BuyProduct from "./pages/BuyProduct";
+import AfterSubmit from "./pages/AfterSubmit";
 
 const App = () => {
   const mytheme = {
@@ -56,6 +57,7 @@ const App = () => {
             <Route path="/singleproduct/:id" element={<SingleProduct />} />
             <Route path="/singleproduct/:id/ordernow" element={<BuyProduct />} />
             <Route path="/*" element={<ErrorPage />} />
+            <Route path="/aftersubmit" element={<AfterSubmit />} />
           </Route>
         </Routes>
         <Footer />
