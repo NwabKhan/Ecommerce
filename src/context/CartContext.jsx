@@ -25,6 +25,8 @@ const initialState = {
   // cart: [],
   cart: getLocalCartData(), //getting the cart data that we store in localStorage
   total_item: "",
+  total_price: "",
+  shipping_fee: 5000, //50$
 };
 
 const CartContextProvider = ({ children }) => {
@@ -47,6 +49,7 @@ const CartContextProvider = ({ children }) => {
   //even when page refreshes. But localStorage accept only strings
   //So, we have to convert cart array to string using JSON.stringify
   useEffect(()=>{
+    dispatch({ type: "CART_ITEM_PRICE_TOTAL" });
     localStorage.setItem("JunaidStore", JSON.stringify(state.cart))
     dispatch({type:"TOTAL_CART_ITEMS"}) // this is used in header/Navbar
   }, [state.cart])

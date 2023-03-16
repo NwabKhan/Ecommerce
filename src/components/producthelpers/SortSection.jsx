@@ -40,9 +40,9 @@ const SortSection = () => {
             <option disabled></option>
             <option value="highest">Price(highest)</option>
             <option disabled></option>
-            <option value="a-z">Price(a-z)</option>
+            <option value="a-z">Sorting(a-z)</option>
             <option disabled></option>
-            <option value="z-a">Price(z-a)</option>
+            <option value="z-a">Sorting(z-a)</option>
           </select>
         </form>
       </div>
