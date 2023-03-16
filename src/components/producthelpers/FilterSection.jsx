@@ -178,8 +178,11 @@ const Wrapper = styled.section`
 
 }
   h3 {
-    padding: 2rem 0;
-    font-size: bold;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+
   }
   .filter-search {
     color: ${({ theme }) => theme.colors.btn};
