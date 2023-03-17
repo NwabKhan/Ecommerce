@@ -61,8 +61,8 @@ const SingleProduct = () => {
               <p className="product-data-price">
                 MRP:
                 <del>
-                  {/* here 100000 is paisa not ruppees */}
-                  <FormatPrice price={price + 100000} />
+                  {/* here price * 0.5 means price is 50% off*/}
+                  <FormatPrice price={price + (price * 0.5)} /> 
                 </del>
               </p>
               <p className="product-data-price product-data-real-price">
