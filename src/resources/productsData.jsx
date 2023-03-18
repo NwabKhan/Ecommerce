@@ -25,4 +25,60 @@ export const data = [
     category: "Glasses",
     featured: true,
   },
+  {
+    id: "CJZBNSSZ00061",
+    name: "Digital Watches", //show on product main pic
+    price: 2800,
+    image: product_images.product4.product4_1 ,
+    category: "Fashion",
+    featured: true,
+  },
+  {
+    id: "CJEJ1596832",
+    name: "Headphones", //show on product main pic
+    price: 3000,
+    image: product_images.product5.product5_1 ,
+    category: "Fashion",
+    featured: true,
+  },
+  {
+    id: "CJJJCWMY01530",
+    name: "Cat Supplies", //show on product main pic
+    price: 1600,
+    image: product_images.product6.product6_1 ,
+    category: "Pet Products",
+    featured: true,
+  },
+  {
+    id: "CJDS1094193",
+    name: "shirts", //show on product main pic
+    price: 2550,
+    image: product_images.product7.product7_1 ,
+    category: "shirts",
+    featured: true,
+  },
+  {
+    id: "CJJJJTJT03804",
+    name: "Decoration", //show on product main pic
+    price: 5000,
+    image: product_images.product8.product8_1 ,
+    category: "Decoration",
+    featured: true,
+  },
+  {
+    id: "CJWJWJJM00057",
+    name: "Toys", //show on product main pic
+    price: 2299,
+    image: product_images.product9.product9_1 ,
+    category: "Toys",
+    featured: true,
+  },
+  {
+    id: "CJWJWJMR00206",
+    name: "Toys", //show on product main pic
+    price: 2299,
+    image: product_images.product10.product10_1 ,
+    category: "Toys",
+    featured: true,
+  },
 ];

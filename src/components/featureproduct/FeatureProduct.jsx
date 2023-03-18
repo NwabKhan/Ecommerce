@@ -57,13 +57,13 @@ const Wrapper = styled.section`
       width: 100%;
     }
     &:hover img {
-      transform: scale(1.2);
+      transform: scale(1.4);
     }
     img {
       max-width: 90%;
       margin-top: 1.5rem;
       height: 20rem;
-      transition: all 0.3s linear;
+      transition: all 0.2s linear;
     }
     .caption {
       position: absolute;
