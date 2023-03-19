@@ -1,84 +1,128 @@
-import product_images from './images/index.jsx';
+import product_images from "./images/index.jsx";
 
 export const data = [
+
   {
     id: "CJJT1244965",
-    name: "Descoration", //show on product main pic
+    name: "Butterfly Quilling Illustration",
+    company: "eosp",
     price: 2099,
-    image: product_images.product1.product1_2 ,
-    category: "Decoration",
+    colors: ["#ffc0cb", "#0000ff", "#cdd0d0"],
+    image: product_images.product1.product1_2,
+    description:
+    "20 Inch Butterfly Quilling Illustration Material Pack Slot",
+    category: "decoration",
     featured: true,
   },
   {
     id: "CJMY1687359",
-    name: "Cloth", //show on product main pic
+    name: "Cute Bunny Hat",
+    company: "discountify",
     price: 3499,
-    image: product_images.product2.product2_1 ,
-    category: "Stylish",
-    featured: true,
+    colors: ["#000", "#22d3ef"],
+    image: product_images.product2.product2_1,
+    description:
+    "Plush Cartoon Cat Dog Rabbit Ears Cute Easter decoration Hat Head Cover Pets Products",
+    category: "fashion",
+    shipping: true,
   },
   {
     id: "CJCF117252405EV",
-    name: "Accessories", //show on product main pic
+    name: "Man Prescription Glasses",
+    company: "easy order",
     price: 3050,
-    image: product_images.product3.product3_1 ,
-    category: "Glasses",
+    colors: ["#22d3ef", "#cdd0d0"],
+    image: product_images.product3.product3_1,
+    description:
+    "Sunglasses Driving Special Anti-ultraviolet Sunglasses For Day And Night",
+    category: "fashion",
     featured: true,
+
   },
   {
     id: "CJZBNSSZ00061",
-    name: "Digital Watches", //show on product main pic
+    name: "Digital Watches",
+    company: "discountify",
     price: 2800,
-    image: product_images.product4.product4_1 ,
-    category: "Fashion",
-    featured: true,
+    colors: ["#000", "#ffc0cb", "#cdd0d0"],
+    image: product_images.product4.product4_1,
+    description:
+    "Vintage clock fashion digital wall clock",
+    category: "accessories",
+    shipping: true,
   },
   {
     id: "CJEJ1596832",
-    name: "Headphones", //show on product main pic
+    name: "Headphones",
+    company: "eosp",
     price: 3000,
-    image: product_images.product5.product5_1 ,
-    category: "Fashion",
-    featured: true,
+    colors: ["#000", "#cdd0d0"],
+    image:  product_images.product5.product5_1,
+    description:
+    "Wireless Light-emitting Bluetooth Headphones",
+    category: "fashion",
+    shipping: true,
   },
   {
     id: "CJJJCWMY01530",
-    name: "Cat Supplies", //show on product main pic
+    name: "Cat Supplies",
+    company: "simple ship",
     price: 1600,
+    colors: ["#ffc0cb", "#cdd0d0"],
     image: product_images.product6.product6_1 ,
-    category: "Pet Products",
+    description:
+    "Vest-style Chest Strap For Cats",
+    category: "fashion",
+    shipping: true,
     featured: true,
   },
   {
     id: "CJDS1094193",
-    name: "shirts", //show on product main pic
+    name: "Man T-shirts",
+    company: "discountify",
     price: 2550,
-    image: product_images.product7.product7_1 ,
-    category: "shirts",
-    featured: true,
+    colors: ["#cdd0d0", "#000"],
+    image: product_images.product7.product7_1,
+    description:
+    "Round Neck Korean Short-Sleeved T-Shirt Men'S Color Matching Men'S T-Shirt Clothes",
+    category: "fashion",
+    shipping: true,
   },
   {
     id: "CJJJJTJT03804",
-    name: "Decoration", //show on product main pic
+    name: "decoration",
     price: 5000,
-    image: product_images.product8.product8_1 ,
-    category: "Decoration",
+    company: "simple ship",
+    colors: ["#000", "#cdd0d0"],
+    image: product_images.product8.product8_1,
+    description:
+    "Home/Office decoration",
+    category: "decoration",
     featured: true,
+    shipping: true,
   },
   {
     id: "CJWJWJJM00057",
-    name: "Toys", //show on product main pic
+    name: "toys",
     price: 2299,
-    image: product_images.product9.product9_1 ,
-    category: "Toys",
-    featured: true,
+    company: "discountify",
+    colors: ["#ffc0cb"],
+    image: product_images.product9.product9_1,
+    description:
+    "Children's intelligence puzzle toys educational toys",
+    category: "toys",
+    shipping: true,
   },
   {
     id: "CJWJWJMR00206",
-    name: "Toys", //show on product main pic
+    name: "toys",
+    company: "discountify",
     price: 2299,
-    image: product_images.product10.product10_1 ,
-    category: "Toys",
+    colors: ["#ff0000", "#22d3ef", "#ffc0cb"],
+    image: product_images.product10.product10_1,
+    description:
+    "Creative Animal Plush toys",
+    category: "toys",
     featured: true,
   },
 ];

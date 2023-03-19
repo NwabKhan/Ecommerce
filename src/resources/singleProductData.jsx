@@ -1,14 +1,16 @@
 import product_images from "./images/index.jsx";
+
 export const singleProductData = [
   {
     id: "CJJT1244965",
     name: "Butterfly Quilling Illustration", // show when we open single product
-    company: "Discountify",
+    company: "eosp",
     price: 2099,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#ffc0cb", "#0000ff", "#cdd0d0"],
     description:
       "20 Inch Butterfly Quilling Illustration Material Pack Slot",
-    category: "Decoration",
+    category: "decoration",
+    featured: true,
     stock: 7,
     reviews: 25,
     stars: 4.8,
@@ -22,12 +24,12 @@ export const singleProductData = [
   {
     id: "CJMY1687359",
     name: "Cute Bunny Hat", // show when we open single product
-    company: "Discountify",
+    company: "discountify",
     price: 3499,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#000", "#22d3ef"],
     description:
-      "Plush Cartoon Cat Dog Rabbit Ears Cute Easter Decoration Hat Head Cover Pets Products",
-    category: "Cloth Styling",
+      "Plush Cartoon Cat Dog Rabbit Ears Cute Easter decoration Hat Head Cover Pets Products",
+    category: "fashion",
     stock: 7,
     reviews: 32,
     stars: 5,
@@ -40,12 +42,12 @@ export const singleProductData = [
   {
     id: "CJCF117252405EV",
     name: "Man Prescription Glasses", // show when we open single product
-    company: "Discountify",
+    company: "easy order",
     price: 3499,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#22d3ef", "#cdd0d0"],
     description:
       "Sunglasses Driving Special Anti-ultraviolet Sunglasses For Day And Night",
-    category: "Accessories",
+    category: "fashion",
     stock: 4,
     reviews: 102,
     stars: 4.6,
@@ -59,12 +61,12 @@ export const singleProductData = [
   {
     id: "CJZBNSSZ00061",
     name: "Digital Watches", // show when we open single product
-    company: "Discountify",
+    company: "discountify",
     price: 2800,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#000", "#ffc0cb", "#cdd0d0"],
     description:
       "Vintage clock fashion digital wall clock",
-    category: "Fashion",
+    category: "accessories",
     stock: 7,
     reviews: 70,
     stars: 4.6,
@@ -79,12 +81,12 @@ export const singleProductData = [
   {
     id: "CJEJ1596832",
     name: "Headphones", // show when we open single product
-    company: "Discountify",
+    company: "eosp",
     price: 3000,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#000", "#cdd0d0"],
     description:
       "Wireless Light-emitting Bluetooth Headphones",
-    category: "Fashion",
+    category: "fashion",
     stock: 6,
     reviews: 50,
     stars: 5.0,
@@ -99,12 +101,12 @@ export const singleProductData = [
   {
     id: "CJJJCWMY01530",
     name: "Cat Supplies", // show when we open single product
-    company: "Discountify",
+    company: "simple ship",
     price: 1600,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#ffc0cb", "#cdd0d0"],
     description:
       "Vest-style Chest Strap For Cats",
-    category: "Fashion",
+    category: "fashion",
     stock: 3,
     reviews: 36,
     stars: 4.3,
@@ -117,13 +119,13 @@ export const singleProductData = [
   
   {
     id: "CJDS1094193",
-    name: "T-shirts", // show when we open single product
-    company: "Discountify",
+    name: "Man T-shirts", // show when we open single product
+    company: "discountify",
     price: 2550,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#cdd0d0", "#000"],
     description:
       "Round Neck Korean Short-Sleeved T-Shirt Men'S Color Matching Men'S T-Shirt Clothes",
-    category: "Fashion",
+    category: "fashion",
     stock: 6,
     reviews: 30,
     stars: 4.7,
@@ -137,13 +139,13 @@ export const singleProductData = [
   
   {
     id: "CJJJJTJT03804",
-    name: "Decoration", // show when we open single product
-    company: "Discountify",
+    name: "decoration", // show when we open single product
+    company: "simple ship",
     price: 5000,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#000", "#cdd0d0"],
     description:
-      "Home/Office Decoration",
-    category: "Decoration",
+      "Home/Office decoration",
+    category: "decoration",
     stock: 8,
     reviews: 120,
     stars: 4.0,
@@ -157,13 +159,13 @@ export const singleProductData = [
   
   {
     id: "CJWJWJJM00057",
-    name: "Toys", // show when we open single product
-    company: "Discountify",
+    name: "toys", // show when we open single product
+    company: "discountify",
     price: 2299,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#ffc0cb"],
     description:
       "Children's intelligence puzzle toys educational toys",
-    category: "Fashion",
+    category: "toys",
     stock: 5,
     reviews: 59,
     stars: 4.6,
@@ -177,13 +179,13 @@ export const singleProductData = [
   
   {
     id: "CJWJWJMR00206",
-    name: "Toys", // show when we open single product
-    company: "Discountify",
+    name: "toys", // show when we open single product
+    company: "discountify",
     price: 2299,
-    colors: ["#ffc0cb", "#0000ff"],
+    colors: ["#ff0000", "#22d3ef", "#ffc0cb"],
     description:
-      "Creative Animal Plush Toys",
-    category: "Toys",
+      "Creative Animal Plush toys",
+    category: "toys",
     stock: 6,
     reviews: 79,
     stars: 5.0,
