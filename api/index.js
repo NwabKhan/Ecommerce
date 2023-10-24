@@ -1,14 +1,23 @@
 import express from "express";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.get("/", (req, res)=>{
-    res.status(200).json({message: "Hellow World"})
-})
+mongoose
+  .connect(process.env.MONGO_KEY)
+  .then(() => {
+    console.log("Connected to DB");
+  })
+  .catch((err) => {
+    console.log("Error: ", err);
+  });
 
-
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Hellow World" });
+});
 
 app.listen(port, () => {
   console.log(`Lisint on Port on port ${port}`);
