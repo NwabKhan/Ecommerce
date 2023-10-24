@@ -15,6 +15,8 @@ import Footer from "./components/footer/Footer";
 import BuyProduct from "./pages/BuyProduct";
 import FormSubmitted from "./pages/FormSubmitted";
 import SuggestionSubmitted from "./pages/SuggestionSubmitted";
+import AdminLogin from "./pages/AdminLogin";
+import AdminPage from "./pages/AdminPage";
 
 const App = () => {
   const mytheme = {
@@ -59,6 +61,8 @@ const App = () => {
             <Route path="/singleproduct/:id" element={<SingleProduct />} />
             <Route path="/singleproduct/:id/ordernow" element={<BuyProduct />} />
             <Route path="/singleproduct/:id/ordernow/formsubmitted" element={<FormSubmitted />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/*" element={<ErrorPage />} />
           </Route>
         </Routes>
