@@ -126,21 +126,24 @@ const CreateProduct = () => {
         return setError("Discount price must be lower than regular price");
       setLoading(true);
       setError(false);
-      const res = await fetch("/api/listing/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}create-product`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+          }),
+        }
+      );
       const data = await res.json();
       setLoading(false);
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`);
+      navigate(`/`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -345,7 +348,7 @@ const CreateProduct = () => {
                   type="number"
                   id="total_reviews"
                   min="2"
-                  max="5"
+                  max="120"
                   required
                   style={{
                     border: "1px solid gray",
