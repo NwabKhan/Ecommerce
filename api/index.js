@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import productRouter from "./routes/product.route.js";
 dotenv.config();
 
 const app = express();
@@ -15,10 +16,19 @@ mongoose
     console.log("Error: ", err);
   });
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Hellow World" });
-});
+app.use(express.json());
+app.use("/admin", productRouter);
 
 app.listen(port, () => {
   console.log(`Lisint on Port on port ${port}`);
+});
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
 });

@@ -1,8 +1,9 @@
 import React from 'react'
+import CreateProduct from '../components/createproduct/CreateProduct'
 
 const AdminPage = () => {
   return (
-    <div>AdminPage</div>
+    <div><CreateProduct /></div>
   )
 }
 

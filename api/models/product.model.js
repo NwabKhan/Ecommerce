@@ -33,6 +33,7 @@ const productSchema = new mongoose.Schema(
     ID: {
       type: String,
       required: true,
+      unique: true
     },
     brand: {
       type: String,
