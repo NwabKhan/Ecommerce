@@ -11,108 +11,132 @@ import ProductImage from "../components/singlehelpers/ProductImage";
 import FormatPrice from "../components/featureproduct/FormatPrice";
 import Star from "../components/singlehelpers/Star";
 import AddToCart from "../components/addtocart/AddToCart";
+import { useState } from "react";
 
 const SingleProduct = () => {
-  const { getSingleProduct, isSingleLoading, singleProduct } = useMyHook(); //calling the function getSingleProduct defined in product context
+  // const { getSingleProduct, isSingleLoading, singleProduct } = useMyHook(); //calling the function getSingleProduct defined in product context
   const { id } = useParams(); // getting the product id found in url using build in module params
+  const [singleProduct, setSingleProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const getSingleProduct = async (id) => {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}get-single-product/${id}`
+      );
+      const data = await res.json();
+      console.log("Data in effect: ", data);
+      if (data.success === false) {
+        setError(true);
+        setLoading(false);
+        return;
+      }
+      setSingleProduct(data);
+      setLoading(false);
+      setError(false);
+    } catch (error) {
+      console.log("first", error);
+      setError(true);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     getSingleProduct(id);
     window.scrollTo(0, 0);
-  }, [id]);
+  }, []);
 
-  //Basically singleProduct is an array(single elemnt) of the currnet ID product. To convert that into object using this line below
-  const finalData = singleProduct.find((n) => n.id === id);
+  //Since initailly singleProduct is empty, so Final data comes out as undefined. So to tackle that issueuse if else
+  const {
+    ID,
+    name,
+    brand,
+    regularPrice,
+    description,
+    stock,
+    rating,
+    total_reviews,
+    imageUrls,
+    discountedPrice,
+    maxQuantity,
+  } = singleProduct;
 
-  //Since initailly singleProduct is empty, so Final data comes out as undefined. So to tackle that issue use if else
-  if (finalData === undefined || isSingleLoading) {
-    return (
-      <div className="page_loading">
-        <h2>---Loading</h2>
-      </div>
-    );
-  } else {
-    const {
-      id: myid,
-      name,
-      company,
-      price,
-      description,
-      // category,
-      stock,
-      stars,
-      reviews,
-      image,
-      // colors,
-    } = finalData;
-
-    return (
-      <Wrapper>
-        <PageNavigation title={name} />
-        <div className="container">
-          <div className="grid grid-two-column">
-            <div className="product-images">
-              <ProductImage images={image} />
-            </div>
-
-            <div className="product-data">
-              <h2>{name}</h2>
-              <Star stars={stars} reviews={reviews} />
-              <p className="product-data-price">
-                MRP:
-                <del>
-                  {/* here price * 0.5 means price is 50% off*/}
-                  <FormatPrice price={price + (price * 0.5)} /> 
-                </del>
-              </p>
-              <p className="product-data-price product-data-real-price">
-                Deal of the Day <FormatPrice price={price} />
-              </p>
-              <p>{description}</p>
-
-              <div className="product-data-warranty">
-                <div className="product-warranty-data">
-                  <TbTruckDelivery className="warranty-icon" />
-                  <p>Fast & Free Delivery </p>
-                </div>
-
-                <div className="product-warranty-data">
-                  <GiCash className="warranty-icon" />
-                  <p>Payment on Delivery</p>
-                </div>
-
-                <div className="product-warranty-data">
-                  <MdSecurity className="warranty-icon" />
-                  <p>Full warranty </p>
-                </div>
-
-                <div className="product-warranty-data">
-                  <TbReplace className="warranty-icon" />
-                  <p>Replace Order</p>
-                </div>
+  return (
+    <div>
+      {Object.keys(singleProduct).length > 0 ? (
+        <Wrapper>
+          <PageNavigation title={name} />
+          <div className="container">
+            <div className="grid grid-two-column">
+              <div className="product-images">
+                <ProductImage images={imageUrls} />
               </div>
 
-              <div className="product-data-info">
-                <p>
-                  Available:
-                  <span> {stock > 0 ? "In Stock" : "Out of Stock"}</span>
+              <div className="product-data">
+                <h2>{name}</h2>
+                <Star stars={rating} reviews={total_reviews} />
+                <p className="product-data-price">
+                  MRP:
+                  <del>
+                    {/* here price * 0.5 means price is 50% off*/}
+                    <FormatPrice price={regularPrice + regularPrice * 0.5} />
+                  </del>
                 </p>
-                <p>
-                  ID : <span> {myid} </span>
+                <p className="product-data-price product-data-real-price">
+                  Deal of the Day <FormatPrice price={discountedPrice} />
                 </p>
-                <p>
-                  Brand :<span> {company} </span>
-                </p>
-              </div>
+                <p>{description}</p>
 
-              <hr />
-              {stock > 0 && <AddToCart singleProduct={finalData} />}
+                <div className="product-data-warranty">
+                  <div className="product-warranty-data">
+                    <TbTruckDelivery className="warranty-icon" />
+                    <p>Fast & Free Delivery </p>
+                  </div>
+
+                  <div className="product-warranty-data">
+                    <GiCash className="warranty-icon" />
+                    <p>Payment on Delivery</p>
+                  </div>
+
+                  <div className="product-warranty-data">
+                    <MdSecurity className="warranty-icon" />
+                    <p>Full warranty </p>
+                  </div>
+
+                  <div className="product-warranty-data">
+                    <TbReplace className="warranty-icon" />
+                    <p>Replace Order</p>
+                  </div>
+                </div>
+
+                <div className="product-data-info">
+                  <p>
+                    Available:
+                    <span> {stock > 0 ? `In Stock (${maxQuantity}) ` : "Out of Stock"}</span>
+                  </p>
+                  <p>
+                    ID : <span> {ID} </span>
+                  </p>
+                  <p>
+                    Brand :<span> {brand} </span>
+                  </p>
+                </div>
+
+                <hr />
+                {stock > 0 && <AddToCart singleProduct={singleProduct} />}
+              </div>
             </div>
           </div>
+        </Wrapper>
+      ) : (
+        <div className="page_loading">
+          <h2>---Loading</h2>
         </div>
-      </Wrapper>
-    );
-  }
+      )}
+    </div>
+  );
 };
 
 const Wrapper = styled.section`

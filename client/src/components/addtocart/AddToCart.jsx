@@ -10,12 +10,11 @@ import CartAmountToggle from "./CartAmountToggle";
 const AddToCart = ({ singleProduct }) => {
   const { addToCart } = useCartHook();
 
-  const { stock, colors, id } = singleProduct; // Destructing the data from finalData
-  const [color, setColor] = useState(colors[0]); // using this to change the active color onclick
+  const { stock, color, ID, maxQuantity } = singleProduct; // Destructing the data from finalData
   const [amount, setAmount] = useState(1); //For the quantity of the product
 
   const setIncrease = () => {
-    amount < stock ? setAmount(amount + 1) : setAmount(stock);
+    amount < maxQuantity ? setAmount(amount + 1) : setAmount(maxQuantity);
   };
 
   const setDecrease = () => {
@@ -26,23 +25,13 @@ const AddToCart = ({ singleProduct }) => {
     <Wrapper>
       <div className="colors">
         <p>
-          Colors:
-          {colors.map((currentColor, index) => {
-            return (
-              <button
-                key={index}
-                style={{ backgroundColor: currentColor }}
-                onClick={() => setColor(currentColor)}
-                className={
-                  color === currentColor ? "btnStyle active" : "btnStyle"
-                }
-              >
-                {color === currentColor ? (
-                  <FaCheck className="checkStyle" />
-                ) : null}
-              </button>
-            );
-          })}
+          Availabe Color:
+          <button
+            style={{ backgroundColor: color }}
+            className={color ? "btnStyle active" : "btnStyle"}
+          >
+            {color ? <FaCheck className="checkStyle" /> : null}
+          </button>
         </p>
       </div>
 
@@ -54,12 +43,12 @@ const AddToCart = ({ singleProduct }) => {
       />
 
       <div className="cart-two-button">
-        <NavLink to= 'ordernow'>
+        <NavLink to="ordernow">
           <Button>Buy Now</Button>
         </NavLink>
         <NavLink
           to="/cart"
-          onClick={() => addToCart(id, color, amount, singleProduct)}
+          onClick={() => addToCart(ID, color, amount, singleProduct)}
         >
           <Button className="btn-clear">Add To Cart</Button>
         </NavLink>
@@ -126,10 +115,10 @@ const Wrapper = styled.section`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-    .btn-clear {
-      margin: 1rem;
+      .btn-clear {
+        margin: 1rem;
+      }
     }
-  }
   }
 `;
 

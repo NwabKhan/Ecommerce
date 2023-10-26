@@ -11,8 +11,8 @@ const ProductImage = ({ images }) => {
           return (
             <figure key={i}>
               <img
-                src={image.url}
-                alt={image.filename}
+                src={image}
+                alt="Product Image"
                 className="box-image--style"
                 onClick={() => setIndex(i)}
               />
@@ -21,7 +21,7 @@ const ProductImage = ({ images }) => {
         })}
       </div>
       <div className="main-screen">
-        <img src={images[index].url} alt={images[index].filename} />
+        <img src={images[index]} alt="Other images" />
       </div>
     </Wrapper>
   );

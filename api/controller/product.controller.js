@@ -19,3 +19,13 @@ export const getAllProducts = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getSingleProduct = async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const sinleProduct = await Product.findOne({ID: id});
+    res.status(200).json(sinleProduct);
+  } catch (error) {
+    next(error);
+  }
+};
