@@ -7,6 +7,7 @@ import {
 } from "firebase/storage";
 import app from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import SingleProduct from "../../pages/SingleProduct";
 const CreateProduct = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
@@ -28,6 +29,7 @@ const CreateProduct = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   // Upload a single image and get a url
   const storeImage = async (file) => {
@@ -94,6 +96,8 @@ const CreateProduct = () => {
   };
 
   const handleChange = (e) => {
+    setShowPreview(false);
+
     //Setting these three, as these are booleans
     if (e.target.id === "stock") {
       setFormData({
@@ -169,7 +173,6 @@ const CreateProduct = () => {
           justifyContent: "center",
           gap: "4rem",
         }}
-        onSubmit={handleSubmit}
       >
         <div style={{ display: "flex", justifyContent: "center", gap: "4rem" }}>
           <div
@@ -523,15 +526,22 @@ const CreateProduct = () => {
               ))}
           </div>
         </div>
-
         <button
-          type="submit"
-          disabled={loading || uploading}
+          type="button"
+          onClick={() => {
+            // navigate(`/singleproduct/${formData.ID}`);
+            setShowPreview(true);
+          }}
+          disabled={uploading}
           className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? "Creating..." : "Create listing"}
+          Preview Product
         </button>
-        {error && <p style={{ color: "red", fontSize: "12px" }}>{error}</p>}
+        {console.log(
+          "🚀 ~ file: CreateProduct.jsx:540 ~ CreateProduct ~ formData:",
+          formData
+        )}{" "}
+        {showPreview && <SingleProduct formData={formData} />}
       </form>
     </main>
   );

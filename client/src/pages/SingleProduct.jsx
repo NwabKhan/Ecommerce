@@ -13,7 +13,7 @@ import Star from "../components/singlehelpers/Star";
 import AddToCart from "../components/addtocart/AddToCart";
 import { useState } from "react";
 
-const SingleProduct = () => {
+const SingleProduct = ({ formData }) => {
   // const { getSingleProduct, isSingleLoading, singleProduct } = useMyHook(); //calling the function getSingleProduct defined in product context
   const { id } = useParams(); // getting the product id found in url using build in module params
   const [singleProduct, setSingleProduct] = useState([]);
@@ -44,7 +44,11 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
-    getSingleProduct(id);
+    if (Object.keys(formData).length > 0) {
+      setSingleProduct(formData);
+    } else {
+      getSingleProduct(id);
+    }
     window.scrollTo(0, 0);
   }, []);
 
@@ -114,7 +118,12 @@ const SingleProduct = () => {
                 <div className="product-data-info">
                   <p>
                     Available:
-                    <span> {stock > 0 ? `In Stock (${maxQuantity}) ` : "Out of Stock"}</span>
+                    <span>
+                      {" "}
+                      {stock > 0
+                        ? `In Stock (${maxQuantity}) `
+                        : "Out of Stock"}
+                    </span>
                   </p>
                   <p>
                     ID : <span> {ID} </span>
