@@ -17,6 +17,7 @@ import FormSubmitted from "./pages/FormSubmitted";
 import SuggestionSubmitted from "./pages/SuggestionSubmitted";
 import AdminLogin from "./pages/AdminLogin";
 import AdminPage from "./pages/AdminPage";
+import PrivateRoutes from "./components/PrivateRoute";
 
 const App = () => {
   const mytheme = {
@@ -31,7 +32,7 @@ const App = () => {
       btn: "rgb(98 84 243)",
       border: "rgba(98, 84, 243, 0.5)",
       hr: "#ffffff",
-      product_bg: '#EDF2FB',
+      product_bg: "#EDF2FB",
       gradient:
         "linear-gradient(0deg, rgb(132 144 255) 0%, rgb(98 189 252) 100%)",
       shadow:
@@ -55,14 +56,25 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/contact" element={<Contact />} /> 
-            <Route path="/contact/suggestionsubmitted" element={<SuggestionSubmitted />} /> 
+            <Route path="/contact" element={<Contact />} />
+            <Route
+              path="/contact/suggestionsubmitted"
+              element={<SuggestionSubmitted />}
+            />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/singleproduct/:id" element={<SingleProduct />} />
-            <Route path="/singleproduct/:id/ordernow" element={<BuyProduct />} />
-            <Route path="/singleproduct/:id/ordernow/formsubmitted" element={<FormSubmitted />} />
+            <Route
+              path="/singleproduct/:id/ordernow"
+              element={<BuyProduct />}
+            />
+            <Route
+              path="/singleproduct/:id/ordernow/formsubmitted"
+              element={<FormSubmitted />}
+            />
             <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route element={<PrivateRoutes />}>
+              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/singleproduct/:id" element={<SingleProduct />} />
+            </Route>
             <Route path="/*" element={<ErrorPage />} />
           </Route>
         </Routes>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
+import { useAuthContext } from "../context/AuthContext";
 
 const MainWrapper = styled.div`
   background: rgba(255, 255, 255, 0.2);
@@ -74,6 +75,9 @@ const ErrorMessage = styled.span`
 `;
 
 function AdminLogin() {
+
+  const {updateIsAuth} = useAuthContext()
+
   const [granted, setGranted] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -92,6 +96,7 @@ function AdminLogin() {
       setSuccess(true);
       await new Promise((resolve) => setTimeout(resolve, 1200));
       setGranted(true);
+      updateIsAuth()
       await new Promise((resolve) => setTimeout(resolve, 800));
       // Redirect to another page (you'll need to use React Router for this)
     } else if (typedUsername === "") {

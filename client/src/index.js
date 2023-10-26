@@ -5,15 +5,18 @@ import App from "./App";
 import { AppProvider } from "./context/ProductContext";
 import { FilterContextProvider } from "./context/FilterContext";
 import { CartContextProvider } from "./context/CartContext";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <AppProvider>
-    <FilterContextProvider>
-      <CartContextProvider>
-        <App />
-      </CartContextProvider>
-    </FilterContextProvider>
-  </AppProvider>
+  <AuthContextProvider>
+    <AppProvider>
+      <FilterContextProvider>
+        <CartContextProvider>
+          <App />
+        </CartContextProvider>
+      </FilterContextProvider>
+    </AppProvider>
+  </AuthContextProvider>
 );
