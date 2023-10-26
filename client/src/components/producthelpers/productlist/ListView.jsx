@@ -9,21 +9,22 @@ const ListView = ({ products }) => {
     <Wrapper className="section">
       <div className="container grid">
         {products.map((currentProduct) => {
-          const { id, name, image, price, description } = currentProduct;
+          const { ID, name, imageUrls, regularPrice, description } =
+            currentProduct;
           return (
-            <div key={id} className="card grid grid-two-column">
+            <div key={ID} className="card grid grid-two-column">
               <figure>
-                <img src={image} alt={name} />
+                <img src={imageUrls[0]} alt={name} />
               </figure>
 
               <div className="card-data">
                 <h3>{name}</h3>
                 <p>
-                  <FormatPrice price={price} />
+                  <FormatPrice price={regularPrice} />
                 </p>
                 <p>{description.slice(0, 95)}...</p>
 
-                <NavLink to={`/singleproduct/${id}`} className="btn-main">
+                <NavLink to={`/singleproduct/${ID}`} className="btn-main">
                   <Button className="btn">Read More</Button>
                 </NavLink>
               </div>
@@ -51,7 +52,8 @@ const Wrapper = styled.section`
     position: relative;
     overflow: hidden;
     transition: all 0.5s linear;
-    ${'' /* &::after {
+    ${
+      "" /* &::after {
       content: "";
       position: absolute;
       top: 0;
@@ -61,7 +63,8 @@ const Wrapper = styled.section`
       background-color: rgba(0, 0, 0, 0.5);
       transition: all 0.2s linear;
       cursor: pointer;
-    } */}
+    } */
+    }
     &:hover::after {
       width: 100%;
     }
