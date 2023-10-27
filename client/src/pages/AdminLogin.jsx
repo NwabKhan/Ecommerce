@@ -74,49 +74,50 @@ const ErrorMessage = styled.span`
 `;
 
 function AdminLogin() {
-
-
   const [granted, setGranted] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const [typedUsername, setTypedUsername] = useState("");
-  const [typedPassword, setTypedPassword] = useState("");
+  const [username, SetUsername] = useState("");
+  const [securityKey, setSecurityKey] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  const username = "check";
-  const password = "111";
 
   const navigate = useNavigate();
 
   // username and pass verification
   const verification = async () => {
-    if (typedUsername === username && typedPassword === password) {
+    if (username && securityKey) {
       setSuccess(true);
+      const res = await fetch(`http://localhost:5000/auth/authenticate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          securityKey,
+        }),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        setError(true);
+        setSuccess(false);
+        return setErrorMessage(data.message);
+      }
       await new Promise((resolve) => setTimeout(resolve, 1200));
       setGranted(true);
       localStorage.setItem("Auth", true);
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      // Redirect to another page (you'll need to use React Router for this)
-    } else if (typedUsername === "") {
-      setErrorMessage("Please type Username!!");
-      setError(true);
-    } else if (typedPassword === "") {
-      setErrorMessage("Please type Secret key!!");
-      setError(true);
-    } else if (typedUsername !== username) {
-      setErrorMessage("Wrong Username!!");
-      setError(true);
-      setTypedUsername("");
-    } else if (typedPassword !== password) {
-      setErrorMessage("Wrong Secret key!!");
-      setError(true);
-      setTypedPassword("");
     } else {
-      setErrorMessage("Something went wrong!");
       setError(true);
-      setTypedUsername("");
-      setTypedPassword("");
+      setErrorMessage("Username OR Pass can notbe empty!");
     }
+    // if (username === username && securityKey === password) {
+    //   setSuccess(true);
+    //   await new Promise((resolve) => setTimeout(resolve, 1200));
+    //   setGranted(true);
+    //   localStorage.setItem("Auth", true);
+    //   await new Promise((resolve) => setTimeout(resolve, 800));
+    //   // Redirect to another page (you'll need to use React Router for this)
+    // }
   };
 
   const clearError = () => {
@@ -137,16 +138,16 @@ function AdminLogin() {
           {error && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <Input
             type="text"
-            value={typedUsername}
-            onChange={(e) => setTypedUsername(e.target.value)}
+            value={username}
+            onChange={(e) => SetUsername(e.target.value)}
             className="input"
             placeholder="User Name"
             onFocus={clearError}
           />
           <Input
             type="password"
-            value={typedPassword}
-            onChange={(e) => setTypedPassword(e.target.value)}
+            value={securityKey}
+            onChange={(e) => setSecurityKey(e.target.value)}
             className="input"
             placeholder="Secret key"
             onFocus={clearError}

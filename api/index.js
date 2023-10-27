@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors"
 import productRouter from "./routes/product.route.js";
+import authRouter from "./routes/auth.route.js";
+
 dotenv.config();
 
 const app = express();
@@ -27,6 +29,7 @@ mongoose
 app.use(cors(corsOptions)) // Use this after the variable declaration
 app.use(express.json());
 app.use("/admin", productRouter);
+app.use("/auth", authRouter)
 
 app.listen(port, () => {
   console.log(`Lisint on Port on port ${port}`);
