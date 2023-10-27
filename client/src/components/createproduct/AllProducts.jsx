@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import ListView from "../producthelpers/productlist/ListView";
 import GridView from "../producthelpers/productlist/GridView";
+import { useSelector, useDispatch } from "react-redux";
+import { setAllProducts } from "../../redux/products/productSlice";
 
 const AllProducts = () => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.products );
+  console.log("🚀 ~ file: AllProducts.jsx:9 ~ AllProducts ~ products:", products)
   const [editDelete, setEditDelete] = useState(false); //To show Edit delete on Grid list
 
   const [loading, setLoading] = useState(false);
@@ -22,7 +25,7 @@ const AllProducts = () => {
         setLoading(false);
         return;
       }
-      setProducts(data);
+      dispatch(setAllProducts(data));
       setEditDelete(true);
       setLoading(false);
       setError(false);

@@ -31,7 +31,7 @@ const CreateProduct = () => {
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
 
@@ -101,7 +101,7 @@ const CreateProduct = () => {
 
   const handleChange = (e) => {
     setShowPreview(false);
-
+    setError("");
     //Setting these three, as these are booleans
     if (e.target.id === "stock") {
       setFormData({
@@ -124,7 +124,24 @@ const CreateProduct = () => {
     }
   };
 
+  const handlePreview = () => {
+    try {
+      if (formData.imageUrls.length < 1)
+        return setImageUploadError("You must upload at least one image");
+      //As sometimes these may be strings like "500", to covert these to number we can add "+" infornt of these
+      if (+formData.regularPrice < +formData.discountedPrice)
+        return setError("Discount price must be lower than regular price");
+      else {
+        setShowPreview(true);
+      }
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
+    console.log("submitting");
     e.preventDefault();
     try {
       if (formData.imageUrls.length < 1)
@@ -152,6 +169,7 @@ const CreateProduct = () => {
         setError(data.message);
       }
       navigate(`/singleproduct/${formData.ID}`);
+      setShowPreview(false);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -175,7 +193,7 @@ const CreateProduct = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "4rem",
+          gap: "1rem",
         }}
       >
         <div style={{ display: "flex", justifyContent: "center", gap: "4rem" }}>
@@ -530,11 +548,14 @@ const CreateProduct = () => {
               ))}
           </div>
         </div>
+        {error && (
+          <p style={{ color: "red", fontSize: "12px", marginTop: "2rem" }}>
+            {error}
+          </p>
+        )}
         <button
           type="button"
-          onClick={() => {
-            setShowPreview(true);
-          }}
+          onClick={handlePreview}
           disabled={uploading}
           className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
         >

@@ -1,11 +1,12 @@
 import React from "react";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import FormatPrice from "./FormatPrice";
-
+import { useDispatch } from "react-redux";
+import { setAllProducts } from "../../redux/products/productSlice";
 const Product = (data) => {
+  const dispatch = useDispatch();
   const { ID, name, imageUrls, regularPrice, brand, admin } = data;
-  const navigate = useNavigate();
   const editProduct = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -22,7 +23,7 @@ const Product = (data) => {
       const res = await fetch(
         `${process.env.REACT_APP_API_URL}delete-product`,
         {
-          method: "POST",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
@@ -32,7 +33,7 @@ const Product = (data) => {
         }
       );
       const data = await res.json();
-      navigate(`/admin`);
+      dispatch(setAllProducts(data));
     }
   };
   return (
