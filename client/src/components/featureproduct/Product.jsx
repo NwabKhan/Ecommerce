@@ -1,10 +1,40 @@
 import React from "react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import FormatPrice from "./FormatPrice";
+
 const Product = (data) => {
   const { ID, name, imageUrls, regularPrice, brand, admin } = data;
-
+  const navigate = useNavigate();
+  const editProduct = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    alert("Edit");
+  };
+  const deleteProduct = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    if (
+      window.confirm(
+        "Are you sure you wish to delete this item?\nThis action can't be undo"
+      )
+    ) {
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}delete-product`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ID,
+          }),
+        }
+      );
+      const data = await res.json();
+      navigate(`/admin`);
+    }
+  };
   return (
     <div>
       <NavLink to={`/singleproduct/${ID}`}>
@@ -12,8 +42,16 @@ const Product = (data) => {
           <figure>
             <img src={imageUrls[0]} alt={name} />
             <figcaption className="caption">{brand}</figcaption>
-            <button onClick={()=>alert("Editing:")} className="edit">Edit</button>
-            <button className="delete">Delete</button>
+            {admin && (
+              <div>
+                <button onClick={editProduct} className="edit">
+                  Edit
+                </button>
+                <button onClick={deleteProduct} className="delete">
+                  Delete
+                </button>
+              </div>
+            )}
           </figure>
 
           <div className="card-data">
