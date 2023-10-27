@@ -4,7 +4,8 @@ import GridView from "../producthelpers/productlist/GridView";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
-  console.log("🚀 ~ file: AllProducts.jsx:6 ~ AllProducts ~ products:", products)
+  const [editDelete, setEditDelete] = useState(false); //To show Edit delete on Grid list
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -22,6 +23,7 @@ const AllProducts = () => {
         return;
       }
       setProducts(data);
+      setEditDelete(true);
       setLoading(false);
       setError(false);
     } catch (error) {
@@ -34,7 +36,7 @@ const AllProducts = () => {
   return (
     <div>
       <button onClick={getProducts}>Get all Products</button>
-      <GridView products={products} />
+      {editDelete && <GridView admin={editDelete} products={products} />}
     </div>
   );
 };

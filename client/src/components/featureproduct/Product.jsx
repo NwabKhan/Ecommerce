@@ -3,7 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import FormatPrice from "./FormatPrice";
 const Product = (data) => {
-  const { ID, name, imageUrls, regularPrice, brand } = data;
+  const { ID, name, imageUrls, regularPrice, brand, admin } = data;
 
   return (
     <div>
@@ -12,6 +12,8 @@ const Product = (data) => {
           <figure>
             <img src={imageUrls[0]} alt={name} />
             <figcaption className="caption">{brand}</figcaption>
+            <button onClick={()=>alert("Editing:")} className="edit">Edit</button>
+            <button className="delete">Delete</button>
           </figure>
 
           <div className="card-data">

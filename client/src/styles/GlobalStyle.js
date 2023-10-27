@@ -85,7 +85,7 @@ li {
 }
 
 
-${'' /* here are some reuseable styles */}
+${"" /* here are some reuseable styles */}
 .container {
   max-width: 120rem;
   margin: 0 auto;
@@ -137,13 +137,12 @@ ${'' /* here are some reuseable styles */}
       font-size: 1.2rem;
       border-radius: 2rem;
     }
-
 input, textarea{
     max-width: 50rem;
     color: ${({ theme }) => theme.colors.black};
     padding: 1.6rem 2.4rem;
     border: 1px solid ${({ theme }) => theme.colors.border};
-    ${'' /* text-transform: uppercase; */}
+    ${"" /* text-transform: uppercase; */}
    box-shadow: ${({ theme }) => theme.colors.shadowSupport};
 }
     input[type="submit"]{

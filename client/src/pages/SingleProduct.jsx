@@ -13,13 +13,17 @@ import Star from "../components/singlehelpers/Star";
 import AddToCart from "../components/addtocart/AddToCart";
 import { useState } from "react";
 
+//This component is also used for preview product while creating:
 const SingleProduct = ({ formData }) => {
-  // const { getSingleProduct, isSingleLoading, singleProduct } = useMyHook(); //calling the function getSingleProduct defined in product context
+  console.log(
+    "🚀 ~ file: SingleProduct.jsx:18 ~ SingleProduct ~ formData:",
+    formData
+  );
   const { id } = useParams(); // getting the product id found in url using build in module params
   const [singleProduct, setSingleProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
+  const [isPreview, setIsPreview] = useState(false); // For admin while previewing product
   const getSingleProduct = async (id) => {
     setLoading(true);
     try {
@@ -44,8 +48,9 @@ const SingleProduct = ({ formData }) => {
   };
 
   useEffect(() => {
-    if (Object.keys(formData).length > 0) {
+    if (formData && Object.keys(formData).length > 0) {
       setSingleProduct(formData);
+      setIsPreview(true);
     } else {
       getSingleProduct(id);
     }
@@ -71,7 +76,18 @@ const SingleProduct = ({ formData }) => {
     <div>
       {Object.keys(singleProduct).length > 0 ? (
         <Wrapper>
-          <PageNavigation title={name} />
+          {!isPreview && <PageNavigation title={name} />}
+          {isPreview && (
+            <h2
+              style={{
+                textAlign: "center",
+                marginTop: "2rem",
+                fontSize: "2.5rem",
+              }}
+            >
+              Previewing Product
+            </h2>
+          )}
           <div className="container">
             <div className="grid grid-two-column">
               <div className="product-images">
@@ -93,27 +109,29 @@ const SingleProduct = ({ formData }) => {
                 </p>
                 <p>{description}</p>
 
-                <div className="product-data-warranty">
-                  <div className="product-warranty-data">
-                    <TbTruckDelivery className="warranty-icon" />
-                    <p>Fast & Free Delivery </p>
-                  </div>
+                {!isPreview && (
+                  <div className="product-data-warranty">
+                    <div className="product-warranty-data">
+                      <TbTruckDelivery className="warranty-icon" />
+                      <p>Fast & Free Delivery </p>
+                    </div>
 
-                  <div className="product-warranty-data">
-                    <GiCash className="warranty-icon" />
-                    <p>Payment on Delivery</p>
-                  </div>
+                    <div className="product-warranty-data">
+                      <GiCash className="warranty-icon" />
+                      <p>Payment on Delivery</p>
+                    </div>
 
-                  <div className="product-warranty-data">
-                    <MdSecurity className="warranty-icon" />
-                    <p>Full warranty </p>
-                  </div>
+                    <div className="product-warranty-data">
+                      <MdSecurity className="warranty-icon" />
+                      <p>Full warranty </p>
+                    </div>
 
-                  <div className="product-warranty-data">
-                    <TbReplace className="warranty-icon" />
-                    <p>Replace Order</p>
+                    <div className="product-warranty-data">
+                      <TbReplace className="warranty-icon" />
+                      <p>Replace Order</p>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className="product-data-info">
                   <p>
@@ -133,8 +151,10 @@ const SingleProduct = ({ formData }) => {
                   </p>
                 </div>
 
-                <hr />
-                {stock > 0 && <AddToCart singleProduct={singleProduct} />}
+                {!isPreview && <hr />}
+                {maxQuantity > 0 && !isPreview && (
+                  <AddToCart singleProduct={singleProduct} />
+                )}
               </div>
             </div>
           </div>

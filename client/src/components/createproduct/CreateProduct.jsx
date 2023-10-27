@@ -8,21 +8,25 @@ import {
 import app from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import SingleProduct from "../../pages/SingleProduct";
+import Dialog from "@mui/material/Dialog";
+import { DialogActions } from "@mui/material";
+import { Button } from "../../styles/Button";
+
 const CreateProduct = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
-    rating: 4,
-    total_reviews: 19,
-    regularPrice: 50,
+    rating: 0,
+    total_reviews: 0,
+    regularPrice: 0,
     discountedPrice: 0,
     description: "",
     stock: false,
     ID: "",
     brand: "",
     color: false,
-    maxQuantity: 5,
+    maxQuantity: 0,
     imageUrls: [],
   });
   const [imageUploadError, setImageUploadError] = useState(false);
@@ -147,7 +151,7 @@ const CreateProduct = () => {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/`);
+      navigate(`/singleproduct/${formData.ID}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -193,7 +197,7 @@ const CreateProduct = () => {
               }}
               id="name"
               maxLength="62"
-              minLength="10"
+              minLength="5"
               required
               onChange={handleChange}
               value={formData.name}
@@ -529,7 +533,6 @@ const CreateProduct = () => {
         <button
           type="button"
           onClick={() => {
-            // navigate(`/singleproduct/${formData.ID}`);
             setShowPreview(true);
           }}
           disabled={uploading}
@@ -537,11 +540,26 @@ const CreateProduct = () => {
         >
           Preview Product
         </button>
-        {console.log(
-          "🚀 ~ file: CreateProduct.jsx:540 ~ CreateProduct ~ formData:",
-          formData
-        )}{" "}
-        {showPreview && <SingleProduct formData={formData} />}
+        <Dialog
+          maxWidth="lg"
+          sx={{ padding: "1rem" }}
+          open={showPreview}
+          onClose={() => setShowPreview(false)}
+        >
+          <SingleProduct formData={formData} />
+          <DialogActions
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginBottom: "1rem",
+            }}
+          >
+            <Button onClick={() => setShowPreview(false)}>
+              Close and Edit
+            </Button>
+            <Button onClick={handleSubmit}>Publish Now</Button>
+          </DialogActions>
+        </Dialog>
       </form>
     </main>
   );

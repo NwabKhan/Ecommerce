@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Product from "../../featureproduct/Product";
-const GridView = ({ products }) => {
+const GridView = ({ products, admin }) => {
   return (
     <Wrapper className="section">
       <div className="container grid grid-three-column">
         {products.map((currentProduct) => {
-          return <Product key={currentProduct.ID} {...currentProduct} />;
+          return <Product key={currentProduct.ID} {...currentProduct} admin={admin} />;
         })}
       </div>
     </Wrapper>
@@ -45,6 +45,36 @@ const Wrapper = styled.section`
     &:hover img {
       transform: scale(1.4);
     }
+    &:hover .edit {
+      display: block;
+      position: absolute;
+      bottom: 15%;
+      right: 10%;
+      text-transform: uppercase;
+      background-color: ${({ theme }) => theme.colors.bg};
+      color: ${({ theme }) => theme.colors.helper};
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 2rem;
+    }
+
+    .edit, .delete {
+      display: none;
+    }
+    
+    &:hover .delete {
+      display: block;
+      position: absolute;
+      bottom: 15%;
+      right: 30%;
+      text-transform: uppercase;
+      background-color: ${({ theme }) => theme.colors.bg};
+      color: ${({ theme }) => theme.colors.helper};
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 2rem;
+    }
+    
     img {
       max-width: 90%;
       margin-top: 1.5rem;
