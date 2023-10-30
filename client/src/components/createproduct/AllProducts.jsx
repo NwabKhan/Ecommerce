@@ -5,8 +5,7 @@ import { setAllProducts } from "../../redux/products/productSlice";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products );
-  console.log("🚀 ~ file: AllProducts.jsx:9 ~ AllProducts ~ products:", products)
+  const products = useSelector((state) => state.products.allProducts );
   const [editDelete, setEditDelete] = useState(false); //To show Edit delete on Grid list
 
   const [loading, setLoading] = useState(false);

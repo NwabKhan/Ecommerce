@@ -2,16 +2,24 @@ import React from "react";
 
 import { NavLink } from "react-router-dom";
 import FormatPrice from "./FormatPrice";
-import { useDispatch } from "react-redux";
-import { setAllProducts } from "../../redux/products/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setAllProducts,
+  setEditProduct,
+} from "../../redux/products/productSlice";
 const Product = (data) => {
   const dispatch = useDispatch();
-  const { ID, name, imageUrls, regularPrice, brand, admin } = data;
-  const editProduct = (event) => {
+  const { ID, name, imageUrls, regularPrice, brand, admin, _id } = data;
+  const products = useSelector((state) => state.products.allProducts);
+
+  const editProduct = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    alert("Edit");
+
+    const selectedProduct = products.find((obj) => obj._id === _id);
+    dispatch(setEditProduct(selectedProduct));
   };
+
   const deleteProduct = async (event) => {
     event.stopPropagation();
     event.preventDefault();

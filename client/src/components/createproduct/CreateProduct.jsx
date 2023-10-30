@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getDownloadURL,
   getStorage,
@@ -11,24 +11,32 @@ import SingleProduct from "../../pages/SingleProduct";
 import Dialog from "@mui/material/Dialog";
 import { DialogActions } from "@mui/material";
 import { Button } from "../../styles/Button";
+import { useSelector } from "react-redux";
 
 const CreateProduct = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    rating: 0,
-    total_reviews: 0,
-    regularPrice: 0,
-    discountedPrice: 0,
-    description: "",
-    stock: false,
-    ID: "",
-    brand: "",
-    color: false,
-    maxQuantity: 0,
-    imageUrls: [],
-  });
+  const editProduct = useSelector((state) => state.products.editProduct);
+  console.log(
+    "🚀 ~ file: CreateProduct.jsx:20 ~ CreateProduct ~ editProduct:",
+    editProduct
+  );
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   rating: 0,
+  //   total_reviews: 0,
+  //   regularPrice: 0,
+  //   discountedPrice: 0,
+  //   description: "",
+  //   stock: false,
+  //   ID: "",
+  //   brand: "",
+  //   color: false,
+  //   maxQuantity: 0,
+  //   imageUrls: [],
+  // });
+  const [formData, setFormData] = useState(editProduct);
+  useEffect(() => {}, [formData]);
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");

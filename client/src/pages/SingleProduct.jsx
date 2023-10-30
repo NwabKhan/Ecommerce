@@ -15,10 +15,6 @@ import { useState } from "react";
 
 //This component is also used for preview product while creating:
 const SingleProduct = ({ formData }) => {
-  console.log(
-    "🚀 ~ file: SingleProduct.jsx:18 ~ SingleProduct ~ formData:",
-    formData
-  );
   const { id } = useParams(); // getting the product id found in url using build in module params
   const [singleProduct, setSingleProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -31,7 +27,6 @@ const SingleProduct = ({ formData }) => {
         `${process.env.REACT_APP_API_URL}get-single-product/${id}`
       );
       const data = await res.json();
-      console.log("Data in effect: ", data);
       if (data.success === false) {
         setError(true);
         setLoading(false);
