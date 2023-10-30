@@ -21,22 +21,25 @@ const CreateProduct = () => {
     "🚀 ~ file: CreateProduct.jsx:20 ~ CreateProduct ~ editProduct:",
     editProduct
   );
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   rating: 0,
-  //   total_reviews: 0,
-  //   regularPrice: 0,
-  //   discountedPrice: 0,
-  //   description: "",
-  //   stock: false,
-  //   ID: "",
-  //   brand: "",
-  //   color: false,
-  //   maxQuantity: 0,
-  //   imageUrls: [],
-  // });
-  const [formData, setFormData] = useState(editProduct);
-  useEffect(() => {}, [formData]);
+
+  useEffect(() => {
+    setFormData(editProduct);
+  }, [editProduct]);
+  const [formData, setFormData] = useState({
+    name: "",
+    rating: 0,
+    total_reviews: 0,
+    regularPrice: 0,
+    discountedPrice: 0,
+    description: "",
+    stock: false,
+    ID: "",
+    brand: "",
+    color: false,
+    maxQuantity: 0,
+    imageUrls: [],
+  });
+  // const [formData, setFormData] = useState(editProduct);
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
@@ -150,6 +153,7 @@ const CreateProduct = () => {
 
   const handleSubmit = async (e) => {
     console.log("submitting");
+    console.log("Formdata bedoere caling:", formData);
     e.preventDefault();
     try {
       if (formData.imageUrls.length < 1)
@@ -586,7 +590,11 @@ const CreateProduct = () => {
             <Button onClick={() => setShowPreview(false)}>
               Close and Edit
             </Button>
-            <Button onClick={handleSubmit}>Publish Now</Button>
+            {editProduct ? (
+              <Button onClick={handleSubmit}>Publish Again</Button>
+            ) : (
+              <Button onClick={handleSubmit}>Publish Now</Button>
+            )}
           </DialogActions>
         </Dialog>
       </form>

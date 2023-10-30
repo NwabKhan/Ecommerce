@@ -15,8 +15,10 @@ import { useState } from "react";
 
 //This component is also used for preview product while creating:
 const SingleProduct = ({ formData }) => {
+  console.log("🚀 ~ file: SingleProduct.jsx:18 ~ SingleProduct ~ formData:", formData)
   const { id } = useParams(); // getting the product id found in url using build in module params
   const [singleProduct, setSingleProduct] = useState([]);
+  console.log("🚀 ~ file: SingleProduct.jsx:20 ~ SingleProduct ~ singleProduct:", singleProduct)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [isPreview, setIsPreview] = useState(false); // For admin while previewing product

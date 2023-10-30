@@ -2,6 +2,7 @@ import { errorHandler } from "../utils/error.js";
 import Product from "../models/product.model.js";
 
 export const createProduct = async (req, res, next) => {
+  delete req.body._id; //Temporary here
   try {
     const product = new Product(req.body);
     await product.save();
@@ -45,7 +46,7 @@ export const editProduct = async (req, res) => {
   const { _id } = req.body;
   console.log("🚀 ~ file: product.controller.js:46 ~ editProduct ~ id:", _id);
   const product = await Product.findById(_id);
-  res.json(product)
+  res.json(product);
   console.log(
     "🚀 ~ file: product.controller.js:48 ~ editProduct ~ product:",
     product
