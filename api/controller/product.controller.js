@@ -44,25 +44,20 @@ export const deleteProduct = async (req, res, next) => {
 
 export const editProduct = async (req, res) => {
   const { _id } = req.body;
-  console.log("🚀 ~ file: product.controller.js:46 ~ editProduct ~ id:", _id);
   const product = await Product.findById(_id);
-  res.json(product);
-  console.log(
-    "🚀 ~ file: product.controller.js:48 ~ editProduct ~ product:",
-    product
-  );
-  // if (!product) {
-  //   return next(errorHandler(404, "Product not found!"));
-  // }
 
-  // try {
-  //   const updatedProduct = await Product.findByIdAndUpdate(
-  //     req.params.id,
-  //     req.body,
-  //     { new: true }
-  //   );
-  //   res.status(200).json(updatedProduct);
-  // } catch (error) {
-  //   next(error);
-  // }
+  if (!product) {
+    return next(errorHandler(404, "Product not found!"));
+  }
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      _id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    next(error);
+  }
 };
