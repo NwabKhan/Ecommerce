@@ -18,6 +18,7 @@ const Product = (data) => {
 
     const selectedProduct = products.find((obj) => obj._id === _id);
     dispatch(setEditProduct(selectedProduct));
+    window.scrollTo(0, 0);
   };
 
   const deleteProduct = async (event) => {
@@ -53,10 +54,18 @@ const Product = (data) => {
             <figcaption className="caption">{brand}</figcaption>
             {admin && (
               <div>
-                <button onClick={editProduct} className="edit">
+                <button
+                  style={{ cursor: "pointer" }}
+                  onClick={editProduct}
+                  className="edit"
+                >
                   Edit
                 </button>
-                <button onClick={deleteProduct} className="delete">
+                <button
+                  style={{ cursor: "pointer" }}
+                  onClick={deleteProduct}
+                  className="delete"
+                >
                   Delete
                 </button>
               </div>

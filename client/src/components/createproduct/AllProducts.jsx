@@ -28,6 +28,7 @@ const AllProducts = () => {
       setEditDelete(true);
       setLoading(false);
       setError(false);
+      window.scrollTo(0, 600);
     } catch (error) {
       console.log("first", error);
       setError(true);

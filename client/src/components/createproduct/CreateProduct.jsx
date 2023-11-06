@@ -17,29 +17,26 @@ const CreateProduct = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const editProduct = useSelector((state) => state.products.editProduct);
-  console.log(
-    "🚀 ~ file: CreateProduct.jsx:20 ~ CreateProduct ~ editProduct:",
-    editProduct
-  );
 
   useEffect(() => {
     setFormData(editProduct);
   }, [editProduct]);
-  const [formData, setFormData] = useState({
-    name: "",
-    rating: 0,
-    total_reviews: 0,
-    regularPrice: 0,
-    discountedPrice: 0,
-    description: "",
-    stock: false,
-    ID: "",
-    brand: "",
-    color: false,
-    maxQuantity: 0,
-    imageUrls: [],
-  });
-  // const [formData, setFormData] = useState(editProduct);
+
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   rating: 0,
+  //   total_reviews: 0,
+  //   regularPrice: 0,
+  //   discountedPrice: 0,
+  //   description: "",
+  //   stock: false,
+  //   ID: "",
+  //   brand: "",
+  //   color: false,
+  //   maxQuantity: 0,
+  //   imageUrls: [],
+  // });
+  const [formData, setFormData] = useState(editProduct);
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
@@ -190,16 +187,29 @@ const CreateProduct = () => {
 
   return (
     <main style={{ padding: "1rem", margin: "0 auto", maxWidth: "80rem" }}>
-      <h2
-        style={{
-          fontSize: "2rem",
-          fontWeight: "600",
-          margin: "1.5rem 0",
-          textAlign: "center",
-        }}
-      >
-        Create a Product
-      </h2>
+      {editProduct.ID ? (
+        <h2
+          style={{
+            fontSize: "2rem",
+            fontWeight: "600",
+            margin: "1.5rem 0",
+            textAlign: "center",
+          }}
+        >
+          Update a Product
+        </h2>
+      ) : (
+        <h2
+          style={{
+            fontSize: "2rem",
+            fontWeight: "600",
+            margin: "1.5rem 0",
+            textAlign: "center",
+          }}
+        >
+          Create a Product
+        </h2>
+      )}
       <form
         style={{
           display: "flex",
@@ -258,6 +268,7 @@ const CreateProduct = () => {
               required
               onChange={handleChange}
               value={formData.ID}
+              disabled={editProduct.ID}
             />
             <div
               style={{
@@ -590,11 +601,12 @@ const CreateProduct = () => {
             <Button onClick={() => setShowPreview(false)}>
               Close and Edit
             </Button>
-            {editProduct ? (
-              <Button onClick={handleSubmit}>Publish Again</Button>
+            {editProduct.ID ? (
+              <Button onClick={handleSubmit}>Update Product</Button>
             ) : (
               <Button onClick={handleSubmit}>Publish Now</Button>
             )}
+            {/* <Button onClick={handleSubmit}>Publish Now</Button> */}
           </DialogActions>
         </Dialog>
       </form>
