@@ -16,12 +16,13 @@ const ProductList = () => {
       </Wrapper>
     );
   } else {
-    if (grid_view === true) {
-      return <GridView products={filterProducts} />;
-    }
-    if (grid_view === false) {
-      return <ListView products={filterProducts} />;
-    }
+    // if (grid_view === true) {
+    //   return <GridView products={filterProducts} />;
+    // }
+    // if (grid_view === false) {
+    //   return <ListView products={filterProducts} />;
+    // }
+    return <GridView />;
   }
 };
 

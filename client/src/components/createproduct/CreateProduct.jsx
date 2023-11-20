@@ -183,7 +183,7 @@ const CreateProduct = () => {
     }
   };
 
-  const handleEditProduct = async(e)=>{
+  const handleEditProduct = async (e) => {
     e.preventDefault();
     try {
       if (formData.imageUrls.length < 1)
@@ -193,18 +193,15 @@ const CreateProduct = () => {
         return setError("Discount price must be lower than regular price");
       setLoading(true);
       setError(false);
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}edit-product`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...formData,
-          }),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}edit-product`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+        }),
+      });
       const data = await res.json();
       setLoading(false);
       if (data.success === false) {
@@ -216,7 +213,7 @@ const CreateProduct = () => {
       setError(error.message);
       setLoading(false);
     }
-  }
+  };
   return (
     <main style={{ padding: "1rem", margin: "0 auto", maxWidth: "80rem" }}>
       {editProduct.ID ? (

@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "../../featureproduct/Product";
-const GridView = ({ products, admin }) => {
+const GridView = ({ admin }) => {
+  const [availableProducts, setAvailableProducts] = useState([]);
+  const getProducts = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}get-all-products`
+      );
+      const data = await res.json();
+      setAvailableProducts(data);
+    } catch (error) {
+      console.log("first", error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
   return (
     <Wrapper className="section">
       <div className="container grid grid-three-column">
-        {products.map((currentProduct) => {
-          return <Product key={currentProduct.ID} {...currentProduct} admin={admin} />;
+        {availableProducts.map((currentProduct) => {
+          return (
+            <Product
+              key={currentProduct.ID}
+              {...currentProduct}
+              admin={admin}
+            />
+          );
         })}
       </div>
     </Wrapper>
@@ -28,7 +50,8 @@ const Wrapper = styled.section`
     position: relative;
     overflow: hidden;
     transition: all 0.5s linear;
-    ${'' /* &::after {
+    ${
+      "" /* &::after {
       content: "";
       position: absolute;
       top: 0;
@@ -38,7 +61,8 @@ const Wrapper = styled.section`
       background-color: rgba(0, 0, 0, 0.5);
       transition: all 0.2s linear;
       cursor: pointer;
-    } */}
+    } */
+    }
     &:hover::after {
       width: 100%;
     }
@@ -58,10 +82,11 @@ const Wrapper = styled.section`
       border-radius: 2rem;
     }
 
-    .edit, .delete {
+    .edit,
+    .delete {
       display: none;
     }
-    
+
     &:hover .delete {
       display: block;
       position: absolute;
@@ -74,7 +99,7 @@ const Wrapper = styled.section`
       font-size: 1.2rem;
       border-radius: 2rem;
     }
-    
+
     img {
       max-width: 90%;
       margin-top: 1.5rem;
